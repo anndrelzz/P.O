@@ -689,6 +689,15 @@ html, body {
 }
 
 /* ══════════════════════════════════════════
+   SLIDE 12 — layout específico
+══════════════════════════════════════════ */
+#slide-12 {
+  justify-content: flex-start;
+  padding-top: 22px;
+  padding-bottom: 58px; /* limpa a nav bar */
+}
+
+/* ══════════════════════════════════════════
    SLIDE 12 — CONCLUSION GRID
 ══════════════════════════════════════════ */
 .conclusion-grid {

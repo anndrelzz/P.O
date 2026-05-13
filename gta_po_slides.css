@@ -693,16 +693,16 @@ html, body {
 ══════════════════════════════════════════ */
 .conclusion-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   width: 100%;
-  max-width: 860px;
+  max-width: 1000px;
   margin-bottom: 12px;
 }
 .conc-card {
   border: 1px solid rgba(245,197,24,0.35);
   background: rgba(245,197,24,0.04);
-  padding: 14px 18px;
+  padding: 12px 14px;
   border-top: 2px solid var(--yellow);
 }
 
@@ -710,8 +710,8 @@ html, body {
 .conc-images {
   display: flex;
   width: 100%;
-  max-width: 860px;
-  height: clamp(90px, 13vh, 140px);
+  max-width: 1000px;
+  height: clamp(110px, 16vh, 170px);
   overflow: hidden;
   gap: 0;
   border: 1px solid rgba(245,197,24,0.2);
@@ -730,17 +730,17 @@ html, body {
   border-left: 2px solid rgba(245,197,24,0.3);
 }
 .conc-title {
-  font-size: clamp(16px, 1.8vw, 20px);
+  font-size: clamp(12px, 1.3vw, 15px);
   color: var(--yellow);
   font-weight: 900;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 .conc-text {
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-size: clamp(11px, 1.05vw, 13px);
   color: var(--dim);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 .final-phrase {
   max-width: 860px;

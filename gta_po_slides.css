@@ -694,16 +694,40 @@ html, body {
 .conclusion-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  gap: 12px;
   width: 100%;
   max-width: 860px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .conc-card {
   border: 1px solid rgba(245,197,24,0.35);
   background: rgba(245,197,24,0.04);
-  padding: 16px 18px;
+  padding: 14px 18px;
   border-top: 2px solid var(--yellow);
+}
+
+/* ── CONCLUSION IMAGES STRIP ── */
+.conc-images {
+  display: flex;
+  width: 100%;
+  max-width: 860px;
+  height: clamp(90px, 13vh, 140px);
+  overflow: hidden;
+  gap: 0;
+  border: 1px solid rgba(245,197,24,0.2);
+}
+.conc-img-dinner {
+  flex: 2.5;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+.conc-img-mission {
+  flex: 1;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  border-left: 2px solid rgba(245,197,24,0.3);
 }
 .conc-title {
   font-size: clamp(16px, 1.8vw, 20px);

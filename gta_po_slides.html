@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Grande Golpe de Los Santos — PO</title>
+<link rel="stylesheet" href="gta_po_slides.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="corner tl"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<img id="rockstar-logo" src="rockstar_logo.jpg" alt="Rockstar Games">
+
+<div id="slideshow">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — CAPA
+  ══════════════════════════════════════════ -->
+  <div class="slide active" id="slide-1">
+    <div class="capa-row">
+      <!-- Logo 3D girando — ao lado do título -->
+      <div class="logo-3d-wrap">
+        <img src="gta5_logo.png" class="logo-3d" alt="GTA V Logo">
+      </div>
+      <!-- Texto da capa -->
+      <div class="capa-text">
+        <div class="mission-tag">— Missão Principal —</div>
+        <div class="title-main">O Grande Golpe<br>de Los Santos</div>
+        <div class="title-sub">Programação Linear Inteira &amp; Branch and Bound</div>
+        <div class="capa-footer">
+          PESQUISA OPERACIONAL &nbsp;·&nbsp; PLI &nbsp;·&nbsp; 2026
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — O PROBLEMA
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-2">
+    <div class="mission-tag">— Briefing da Missão —</div>
+    <div class="slide-heading">O Problema</div>
+
+    <div class="resource-grid">
+      <div class="resource-card">
+        <div class="rc-val">120h</div>
+        <div class="rc-lbl">Horas disponíveis para agir</div>
+      </div>
+      <div class="resource-card">
+        <div class="rc-val">$100k</div>
+        <div class="rc-lbl">Fundo de suborno disponível</div>
+      </div>
+      <div class="resource-card">
+        <div class="rc-val">≥ 8pts</div>
+        <div class="rc-lbl">Reputação mínima exigida</div>
+      </div>
+    </div>
+
+    <div class="scenario-box">
+      <p>
+        <span class="highlight">Trevor</span>, <span class="highlight">Michael</span> e
+        <span class="highlight">Franklin</span> têm <span class="highlight">120 horas</span>
+        e <span class="highlight">$100k de suborno</span>.
+        Precisam manter reputação mínima de <span class="green">8 pontos</span> junto ao submundo.
+      </p>
+      <br>
+      <p>
+        <strong style="color:var(--yellow)">OBJETIVO:</strong>
+        Maximizar o lucro total <span class="green">escolhendo quais crimes realizar</span> —
+        e quantas vezes — respeitando todas as restrições de tempo, orçamento e reputação.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — VARIÁVEIS DE DECISÃO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-3">
+    <div class="mission-tag">— Modelagem —</div>
+    <div class="slide-heading">Variáveis de Decisão</div>
+
+    <div style="font-size:clamp(14px,1.6vw,17px);color:var(--dim);margin-bottom:14px;text-align:center;">
+      Cada variável representa <span class="highlight">quantas vezes</span> o crime é executado.
+    </div>
+
+    <div class="var-grid var-grid-5">
+      <div class="var-card">
+        <div class="var-name">x₁</div>
+        <div class="var-label">🚗 Roubo de Veículos de Luxo</div>
+        <div class="var-desc">Mínimo obrigatório: <span style="color:var(--yellow)">x₁ ≥ 2</span><br>Necessários para a fuga.</div>
+      </div>
+      <div class="var-card">
+        <div class="var-name">x₂</div>
+        <div class="var-label">💎 Assaltos à Joalheria</div>
+        <div class="var-desc">Sem limite específico.<br>Risco moderado, lucro alto.</div>
+      </div>
+      <div class="var-card">
+        <div class="var-name">x₃</div>
+        <div class="var-label">💻 Hacks no Sistema Bancário</div>
+        <div class="var-desc">Sem limite específico.<br>Alta expertise necessária.</div>
+      </div>
+      <div class="var-card">
+        <div class="var-name">x₄</div>
+        <div class="var-label">🔫 Sequestros ao Negociador</div>
+        <div class="var-desc">Máximo: <span style="color:var(--red)">x₄ ≤ 1</span><br>Muito arriscado.</div>
+      </div>
+      <div class="var-card">
+        <div class="var-name">x₅</div>
+        <div class="var-label">🏎️ Corridas Ilegais de Rua</div>
+        <div class="var-desc">Máximo: <span style="color:var(--red)">x₅ ≤ 3</span><br>Polícia fica de olho.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;font-size:clamp(14px,1.6vw,17px);color:var(--dim);text-align:center;">
+      Todas as variáveis são <span class="highlight">inteiras não-negativas</span>:
+      &nbsp; x₁, x₂, x₃, x₄, x₅ ∈ ℤ⁺
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 4 — TABELA DE DADOS
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-4">
+    <div class="mission-tag">— Dados da Operação —</div>
+    <div class="slide-heading">Tabela de Dados</div>
+
+    <table class="gta-table">
+      <thead>
+        <tr>
+          <th>Variável</th>
+          <th>Crime</th>
+          <th>Tempo (h)</th>
+          <th>Suborno ($k)</th>
+          <th>Lucro ($k)</th>
+          <th>Reputação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="var-col">x₁</td>
+          <td style="text-align:left">🚗 Roubar veículos de luxo</td>
+          <td>15</td><td>8</td><td class="profit">25</td><td>1</td>
+        </tr>
+        <tr>
+          <td class="var-col">x₂</td>
+          <td style="text-align:left">💎 Assaltar joalheria</td>
+          <td>30</td><td>20</td><td class="profit">60</td><td>2</td>
+        </tr>
+        <tr>
+          <td class="var-col">x₃</td>
+          <td style="text-align:left">💻 Hackear sistema bancário</td>
+          <td>40</td><td>35</td><td class="profit">90</td><td>3</td>
+        </tr>
+        <tr>
+          <td class="var-col">x₄</td>
+          <td style="text-align:left">🔫 Sequestrar negociador</td>
+          <td>50</td><td>50</td><td class="profit">130</td><td>4</td>
+        </tr>
+        <tr>
+          <td class="var-col">x₅</td>
+          <td style="text-align:left">🏎️ Corridas ilegais de rua</td>
+          <td>20</td><td>10</td><td class="profit">40</td><td>3</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px;font-size:clamp(13px,1.4vw,16px);color:var(--dim);text-align:center;">
+      Restrições globais: &nbsp;<span class="highlight">120h disponíveis</span> &nbsp;|&nbsp;
+      <span class="highlight">$100k para subornos</span> &nbsp;|&nbsp;
+      <span class="green">Reputação mínima total: 8</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 5 — MODELO MATEMÁTICO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-5">
+    <div class="mission-tag">— Modelagem —</div>
+    <div class="slide-heading">Modelo Matemático</div>
+
+    <div class="model-cols">
+      <div class="model-half">
+        <div class="model-half-title">Função Objetivo</div>
+        <div style="font-size:clamp(13px,1.4vw,16px);color:var(--dim);margin-bottom:10px;">Maximizar Z =</div>
+        <div class="formula-green">
+          25x₁ + 60x₂ + 90x₃<br>
+          + 130x₄ + 40x₅
+        </div>
+        <div class="formula-note">( lucro em milhares de dólares )</div>
+      </div>
+
+      <div class="model-half">
+        <div class="model-half-title">Restrições</div>
+        <div class="formula-rest">
+          <span class="cm">// tempo (horas)</span><br>
+          15x₁+30x₂+40x₃+50x₄+20x₅ ≤ 120<br>
+          <br>
+          <span class="cm">// suborno ($k)</span><br>
+          8x₁+20x₂+35x₃+50x₄+10x₅ ≤ 100<br>
+          <br>
+          <span class="cm">// reputação (pts)</span><br>
+          x₁+2x₂+3x₃+4x₄+3x₅ ≥ 8<br>
+          <br>
+          <span class="cm">// limites individuais</span><br>
+          x₄ ≤ 1 &nbsp;·&nbsp; x₅ ≤ 3 &nbsp;·&nbsp; x₁ ≥ 2<br>
+          <br>
+          <span class="cm">// integralidade</span><br>
+          x₁, x₂, x₃, x₄, x₅ ∈ ℤ⁺
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 6 — AS 2 PERGUNTAS
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-6">
+    <div class="mission-tag">— Missão Dupla —</div>
+    <div class="slide-heading">As 2 Perguntas</div>
+
+    <div class="question-cards">
+      <div class="q-card">
+        <div class="q-card-num">[ QUESTÃO 01 ]</div>
+        <div class="q-card-text">
+          "Encontre a solução ótima que maximiza o lucro total respeitando todas as restrições.<br><br>
+          Qual é o <span class="highlight">lucro máximo</span>?"
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-num">[ QUESTÃO 02 ]</div>
+        <div class="q-card-text">
+          "Suponha que o negociador fugiu e <span class="highlight">x₄ = 0</span>.<br><br>
+          Existe solução viável? Qual é o <span class="highlight">novo lucro máximo</span>?"
+        </div>
+      </div>
+    </div>
+
+    <div class="method-box">
+      Para responder, usamos o método Branch and Bound.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 7 — BRANCH AND BOUND EXPLICADO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-7">
+    <div class="mission-tag">— Método de Resolução —</div>
+    <div class="slide-heading">Branch and Bound</div>
+
+    <div class="bb-container">
+      <div class="bb-steps">
+        <div class="bb-step">
+          <span class="bb-num">1</span>
+          <span class="bb-text">
+            <span class="highlight">Relaxação Linear:</span>
+            resolve o problema ignorando a regra de inteiros temporariamente.
+            Obtém solução fracionária — limite superior do lucro.
+          </span>
+        </div>
+        <div class="bb-step">
+          <span class="bb-num">2</span>
+          <span class="bb-text">
+            <span class="highlight">Identifica fração:</span>
+            x₃ = <span class="red-text">0.97</span> —
+            "Não dá hackear 0.97 vezes!" O resultado não é inteiro, então não pode ser usado.
+          </span>
+        </div>
+        <div class="bb-step">
+          <span class="bb-num">3</span>
+          <span class="bb-text">
+            <span class="highlight">Branch:</span>
+            cria dois mundos paralelos —
+            <span class="green">x₃ ≤ 0</span> (não faz o hack) e
+            <span class="red-text">x₃ ≥ 1</span> (faz pelo menos 1 hack).
+            Cada ramo é um subproblema independente.
+          </span>
+        </div>
+        <div class="bb-step">
+          <span class="bb-num">4</span>
+          <span class="bb-text">
+            <span class="highlight">Poda:</span>
+            descarta ramos <span class="red-text">inviáveis</span> (violam restrições) ou com
+            <span class="red-text">lucro menor</span> que a melhor solução inteira já encontrada.
+          </span>
+        </div>
+      </div>
+
+      <!-- Árvore de decisão SVG -->
+      <div class="bb-tree-wrap">
+        <svg viewBox="0 0 820 195" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New',monospace">
+          <!-- Raiz -->
+          <rect x="300" y="4" width="220" height="46" rx="4" fill="#1a1a00" stroke="#f5c518" stroke-width="1.5"/>
+          <text x="410" y="23" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">LP Relaxado</text>
+          <text x="410" y="42" text-anchor="middle" fill="#39ff14" font-size="10">x₃ = 0.97 (fração!) — Z* ≈ 269k</text>
+
+          <!-- Linhas de branch -->
+          <line x1="355" y1="50" x2="195" y2="100" stroke="#f5c518" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="465" y1="50" x2="625" y2="100" stroke="#f5c518" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="250" y="86" fill="#39ff14" font-size="10" font-weight="bold">x₃ = 0</text>
+          <text x="525" y="86" fill="#ff2222" font-size="10" font-weight="bold">x₃ ≥ 1</text>
+
+          <!-- Nó esquerdo — solução inteira válida -->
+          <rect x="90" y="100" width="210" height="46" rx="4" fill="#0a2a0a" stroke="#39ff14" stroke-width="2"/>
+          <text x="195" y="119" text-anchor="middle" fill="#39ff14" font-size="11" font-weight="bold">x₅ = 2 (inteiro ✓)</text>
+          <text x="195" y="137" text-anchor="middle" fill="#39ff14" font-size="10">Z = 260k → candidato à ótima</text>
+
+          <!-- Nó direito — inviável -->
+          <rect x="520" y="100" width="210" height="46" rx="4" fill="#1a0000" stroke="#ff2222" stroke-width="1.5"/>
+          <text x="625" y="119" text-anchor="middle" fill="#ff2222" font-size="11" font-weight="bold">Suborno = $101k</text>
+          <text x="625" y="137" text-anchor="middle" fill="#ff2222" font-size="10">&gt; $100k → Inviável — podado ✗</text>
+
+          <!-- Solução ótima final -->
+          <line x1="195" y1="146" x2="195" y2="166" stroke="#39ff14" stroke-width="1.5"/>
+          <rect x="70" y="166" width="250" height="26" rx="4" fill="#0a2a0a" stroke="#39ff14" stroke-width="2"/>
+          <text x="195" y="183" text-anchor="middle" fill="#39ff14" font-size="11" font-weight="bold">✓ SOLUÇÃO ÓTIMA → $260k</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 8 — DE ONDE VEM O 0.97
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-8">
+    <div class="mission-tag">— Análise Matemática —</div>
+    <div class="slide-heading">De Onde Vem o 0.97?</div>
+
+    <div style="font-size:clamp(14px,1.6vw,17px);color:var(--dim);margin-bottom:16px;text-align:center;">
+      A relaxação linear com a conta exata:
+    </div>
+
+    <div class="calc-steps">
+      <div class="calc-step">
+        <div class="cs-num">①</div>
+        <div class="cs-body">
+          <div class="cs-label">Fixamos os obrigatórios: x₁ = 2 e x₄ = 1</div>
+          <div class="cs-formula">Suborno usado = 8(2) + 50(1) = $16k + $50k = $66k</div>
+        </div>
+      </div>
+      <div class="calc-step">
+        <div class="cs-num">②</div>
+        <div class="cs-body">
+          <div class="cs-label">Calculamos o suborno disponível restante</div>
+          <div class="cs-formula">Disponível = $100k − $66k = <span style="color:var(--yellow);font-weight:bold;">$34k</span></div>
+        </div>
+      </div>
+      <div class="calc-step">
+        <div class="cs-num">③</div>
+        <div class="cs-body">
+          <div class="cs-label">Custo de 1 hack no sistema bancário</div>
+          <div class="cs-formula">x₃ custa $35k — mas só temos $34k!</div>
+        </div>
+      </div>
+      <div class="calc-step">
+        <div class="cs-num">④</div>
+        <div class="cs-body">
+          <div class="cs-label">O Simplex (relaxação linear) calcula a fração máxima possível</div>
+          <div class="cs-formula">x₃ = $34k ÷ $35k = <span class="frac">0.97</span> &nbsp;← decimal, não é inteiro!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict" style="max-width:820px;border-left-color:var(--yellow);background:rgba(245,197,24,0.04);">
+      Por isso o Simplex sozinho não resolve —
+      <span class="green">precisa do Branch and Bound para garantir valores inteiros.</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 9 — RESOLUÇÃO PASSO A PASSO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-9">
+    <div class="mission-tag">— Resolução —</div>
+    <div class="slide-heading">Resolução Passo a Passo</div>
+
+    <div class="bb-container">
+      <div class="bb-steps">
+        <div class="bb-step">
+          <span class="bb-num">1</span>
+          <span class="bb-text">
+            <span class="highlight">x₁ = 2</span> roubos de veículos (obrigatório) →
+            usa <span class="highlight">30h</span> e <span class="highlight">$16k</span>
+            &nbsp;→&nbsp; sobram <span class="green">90h e $84k</span>
+          </span>
+        </div>
+        <div class="bb-step">
+          <span class="bb-num">2</span>
+          <span class="bb-text">
+            <span class="highlight">x₄ = 1</span> sequestro (o mais lucrativo) →
+            usa <span class="highlight">50h</span> e <span class="highlight">$50k</span>
+            &nbsp;→&nbsp; sobram <span class="green">40h e $34k</span>
+          </span>
+        </div>
+        <div class="bb-step bad">
+          <span class="bb-num bad">3</span>
+          <span class="bb-text">
+            Tentar <span class="red-text">x₃ = 1</span> hack no sistema bancário →
+            precisaria de <span class="red-text">$35k</span> mas só temos $34k disponíveis.
+            &nbsp;<span class="red-text">→ INVIÁVEL — ramo podado! ✗</span>
+          </span>
+        </div>
+        <div class="bb-step good">
+          <span class="bb-num good">4</span>
+          <span class="bb-text">
+            <span class="green">x₅ = 2</span> corridas ilegais →
+            usa <span class="highlight">40h</span> e <span class="highlight">$20k</span>
+            &nbsp;→&nbsp; recursos esgotados.
+            &nbsp;<span class="green">→ VÁLIDO ✓</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="total-box" style="max-width:700px;width:100%;">
+        <div class="tl">Z = 25(2) + 130(1) + 40(2) &nbsp;=&nbsp; 50 + 130 + 80</div>
+        <div class="tv">= $260.000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 10 — QUESTÃO 1: RESPOSTA
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-10">
+    <div class="mission-tag">— Missão Concluída —</div>
+    <div class="slide-heading">Questão 1: Resposta</div>
+
+    <div class="question-quote">
+      "Encontre a solução ótima que maximiza o lucro total respeitando todas as restrições. Qual é o lucro máximo?"
+    </div>
+
+    <div class="ans-layout">
+      <!-- Variáveis e Z -->
+      <div class="ans-vars">
+        <div class="ans-vars-title">[ SOLUÇÃO ]</div>
+        <div class="ans-var">x₁ = <span class="val">2</span> &nbsp;(roubos)</div>
+        <div class="ans-var">x₂ = <span class="val">0</span> &nbsp;(assaltos)</div>
+        <div class="ans-var">x₃ = <span class="val">0</span> &nbsp;(hacks)</div>
+        <div class="ans-var">x₄ = <span class="val">1</span> &nbsp;(sequestro)</div>
+        <div class="ans-var">x₅ = <span class="val">2</span> &nbsp;(corridas)</div>
+        <div class="z-mini">
+          <div class="zl">LUCRO MÁXIMO</div>
+          <div class="zv">$260k</div>
+        </div>
+      </div>
+
+      <!-- Métricas e conclusão -->
+      <div>
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="mc-val">120h / 120h</div>
+            <div class="mc-lbl">Tempo utilizado</div>
+          </div>
+          <div class="metric-card">
+            <div class="mc-val">$86k / $100k</div>
+            <div class="mc-lbl">Suborno utilizado</div>
+          </div>
+          <div class="metric-card">
+            <div class="mc-val">12 pts</div>
+            <div class="mc-lbl">Reputação (mín. 8)</div>
+          </div>
+        </div>
+
+        <ul class="check-list">
+          <li>Tempo: 15(2)+50(1)+20(2) = 120h ≤ 120h &nbsp;<span class="highlight">✓ exato</span></li>
+          <li>Suborno: 8(2)+50(1)+10(2) = $86k ≤ $100k &nbsp;<span class="highlight">✓ sobram $14k</span></li>
+          <li>Reputação: 1(2)+4(1)+3(2) = 12 pts ≥ 8 &nbsp;<span class="highlight">✓</span></li>
+          <li>x₄ = 1 ≤ 1 &nbsp;<span class="highlight">✓</span> &nbsp;·&nbsp; x₅ = 2 ≤ 3 &nbsp;<span class="highlight">✓</span> &nbsp;·&nbsp; x₁ = 2 ≥ 2 &nbsp;<span class="highlight">✓</span></li>
+        </ul>
+
+        <div class="verdict" style="margin-top:10px;">
+          O <span class="highlight">tempo foi o recurso limitante</span> — sobraram $14k de suborno
+          mas não havia mais horas. A solução é inteira, viável e ótima.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 11 — QUESTÃO 2: RESPOSTA
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-11">
+    <div class="mission-tag">— Análise de Contingência —</div>
+    <div class="slide-heading">Questão 2: Resposta</div>
+
+    <div class="question-quote">
+      "Suponha que o negociador fugiu e x₄ = 0. Existe solução viável? Qual é o novo lucro máximo?"
+    </div>
+
+    <div class="ans-layout">
+      <!-- Nova solução -->
+      <div class="ans-vars">
+        <div class="ans-vars-title">[ NOVA SOLUÇÃO ]</div>
+        <div class="ans-var">x₁ = <span class="val">2</span> &nbsp;(roubos)</div>
+        <div class="ans-var">x₂ = <span class="val">0</span> &nbsp;(assaltos)</div>
+        <div class="ans-var">x₃ = <span class="val">1</span> &nbsp;(hack)</div>
+        <div class="ans-var zeroed">x₄ = 0 &nbsp;(FORÇADO)</div>
+        <div class="ans-var">x₅ = <span class="val">2</span> &nbsp;(corridas)</div>
+        <div class="z-mini">
+          <div class="zl">NOVO LUCRO</div>
+          <div class="zv">$220k</div>
+        </div>
+      </div>
+
+      <!-- Verificação e conclusão -->
+      <div>
+        <table class="check-table">
+          <thead>
+            <tr>
+              <th>Restrição</th>
+              <th>Cálculo</th>
+              <th>Limite</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tempo</td>
+              <td>30 + 40 + 40 = 110h</td>
+              <td>≤ 120h</td>
+              <td class="check-ok">✓</td>
+            </tr>
+            <tr>
+              <td>Suborno</td>
+              <td>16 + 35 + 20 = $71k</td>
+              <td>≤ $100k</td>
+              <td class="check-ok">✓</td>
+            </tr>
+            <tr>
+              <td>Reputação</td>
+              <td>2 + 3 + 6 = 11 pts</td>
+              <td>≥ 8 pts</td>
+              <td class="check-ok">✓</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="formula-z">
+          Z = 25(2) + 90(1) + 40(2) = 50 + 90 + 80 = $220.000
+        </div>
+
+        <div class="verdict">
+          <span class="green">Sim, existe solução viável.</span>
+          O bando perde <span class="highlight">$40k</span> sem o sequestro —
+          mas a missão continua. O sequestro era responsável por
+          <span class="highlight">$130k</span> do lucro original de $260k.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 12 — CONCLUSÃO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-12">
+    <div class="mission-tag">— Fim da Missão —</div>
+    <div class="slide-heading">Conclusão</div>
+
+    <div class="conclusion-grid">
+      <div class="conc-card">
+        <div class="conc-title">Variáveis de Decisão</div>
+        <div class="conc-text">
+          Representam o que podemos controlar — quantas vezes cada crime é executado.
+          São a base de toda modelagem em Programação Linear Inteira.
+        </div>
+      </div>
+      <div class="conc-card">
+        <div class="conc-title">Função Objetivo</div>
+        <div class="conc-text">
+          Define o que queremos maximizar ou minimizar — o lucro total do bando.
+          Toda decisão aponta para esse norte.
+        </div>
+      </div>
+      <div class="conc-card">
+        <div class="conc-title">Restrições</div>
+        <div class="conc-text">
+          Os limites que não podem ser violados — tempo, suborno, reputação.
+          A solução ótima vive na fronteira viável dessas restrições.
+        </div>
+      </div>
+      <div class="conc-card">
+        <div class="conc-title">Branch and Bound</div>
+        <div class="conc-text">
+          Garante a solução ótima inteira explorando e podando o espaço de busca.
+          Mais eficiente que testar todas as combinações possíveis.
+        </div>
+      </div>
+    </div>
+
+    <div class="final-phrase">
+      "Pesquisa Operacional — a matemática que toma as melhores decisões, mesmo no submundo."
+    </div>
+  </div>
+
+</div><!-- #slideshow -->
+
+<!-- ── NAVIGATION ── -->
+<div id="nav">
+  <button id="btn-prev" onclick="goSlide(-1)" disabled>◀ ANTERIOR</button>
+  <span id="counter">1 / 12</span>
+  <button id="btn-next" onclick="goSlide(1)">PRÓXIMO ▶</button>
+</div>
+
+<script src="gta_po_slides.js"></script>
+</body>
+</html>

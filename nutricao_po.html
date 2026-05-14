@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PL Aplicada à Nutrição — PO 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:   #FF2D78;
+  --white:  #e8e8e8;
+  --bg:     #0a0a0a;
+  --dim:    #888;
+  --card:   rgba(255,45,120,0.05);
+  --border: rgba(255,45,120,0.30);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ─── PROGRESS BAR ─── */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0;
+  background: var(--pink);
+  box-shadow: 0 0 8px rgba(255,45,120,0.8);
+  transition: width 0.4s ease;
+  z-index: 9999;
+}
+
+/* ─── SLIDESHOW ─── */
+#slideshow {
+  width: 100vw; height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ─── BASE SLIDE ─── */
+.slide {
+  position: absolute;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 36px 60px 84px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+.slide.active { opacity: 1; pointer-events: all; }
+
+.slide::before, .slide::after {
+  content: '';
+  position: absolute;
+  width: 32px; height: 32px;
+  border-color: var(--pink);
+  border-style: solid;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.slide::before { top: 14px; left: 14px; border-width: 2px 0 0 2px; }
+.slide::after  { bottom: 60px; right: 14px; border-width: 0 2px 2px 0; }
+
+/* ─── NAV ─── */
+#nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 48px;
+  background: rgba(10,10,10,0.95);
+  border-top: 1px solid var(--pink);
+  display: flex; align-items: center; justify-content: center;
+  gap: 24px;
+  z-index: 200;
+}
+#nav button {
+  background: transparent;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  padding: 6px 20px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s, color 0.2s;
+}
+#nav button:hover:not(:disabled) { background: var(--pink); color: #000; }
+#nav button:disabled { opacity: 0.3; cursor: default; }
+#counter {
+  color: var(--dim);
+  font-size: 14px;
+  min-width: 60px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.section-tag {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(10px, 1vw, 12px);
+  color: var(--pink);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.heading {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(20px, 2.8vw, 36px);
+  font-weight: 700;
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+  width: 100%;
+  text-align: center;
+}
+
+/* ─── TWO-COLUMN ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  width: 100%;
+  max-width: 1080px;
+  align-items: start;
+}
+.col-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(11px, 1.2vw, 14px);
+  color: var(--pink);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── SLIDE 1 — CAPA ─── */
+.capa-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(28px, 4.2vw, 54px);
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.capa-title span { color: var(--pink); }
+.capa-divider { width: 80px; height: 2px; background: var(--pink); margin: 14px auto; opacity: 0.6; }
+.capa-subtitle {
+  font-size: clamp(13px, 1.5vw, 18px);
+  color: var(--dim);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 680px;
+  margin-bottom: 18px;
+}
+.capa-team {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 8px 24px;
+  margin-bottom: 12px;
+}
+.capa-member { font-size: clamp(11px, 1.1vw, 13px); color: var(--dim); letter-spacing: 1px; }
+.capa-year {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(13px, 1.4vw, 16px);
+  color: rgba(255,45,120,0.5);
+  letter-spacing: 4px;
+}
+
+/* ─── SLIDE 2 ─── */
+.prob-desc {
+  background: var(--card);
+  border-left: 3px solid var(--pink);
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  max-width: 840px; width: 100%;
+  font-size: clamp(12px, 1.25vw, 14px);
+  color: #ccc;
+  line-height: 1.7;
+}
+.info-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; max-width: 840px; width: 100%;
+}
+.info-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+}
+.info-label {
+  font-family: 'Oswald', sans-serif;
+  color: var(--pink);
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.info-value { font-size: clamp(12px, 1.2vw, 14px); color: var(--white); line-height: 1.6; }
+
+/* ─── SLIDE 3 ─── */
+.var-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.var-list li {
+  font-size: clamp(12px, 1.2vw, 14px);
+  color: var(--white);
+  padding: 6px 12px;
+  border-left: 2px solid var(--pink);
+  background: var(--card);
+}
+.var-list li span { color: var(--pink); }
+.var-constraint {
+  font-size: clamp(11px, 1.1vw, 13px);
+  color: var(--dim);
+  margin-top: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+}
+.nut-table { width: 100%; border-collapse: collapse; }
+.nut-table th {
+  font-family: 'Oswald', sans-serif;
+  color: var(--pink);
+  font-size: clamp(9px, 0.9vw, 11px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 7px 6px;
+  border-bottom: 2px solid var(--border);
+  text-align: center;
+  background: rgba(255,45,120,0.05);
+}
+.nut-table td {
+  font-size: clamp(11px, 1vw, 12px);
+  color: var(--white);
+  padding: 6px 6px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nut-table tr:hover td { background: rgba(255,45,120,0.06); }
+.nut-table td:first-child { color: var(--pink); text-align: left; }
+
+/* ─── SLIDE 4 ─── */
+.obj-box {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(12px, 1.3vw, 15px);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--pink);
+  padding: 14px 18px;
+  line-height: 2.2;
+  color: var(--white);
+}
+.obj-box .lbl {
+  font-family: 'Oswald', sans-serif;
+  color: var(--pink);
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.cst-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.cst-list li {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(10px, 0.95vw, 12px);
+  color: var(--white);
+  padding: 5px 10px;
+  border-left: 2px solid rgba(255,45,120,0.4);
+  background: var(--card);
+  line-height: 1.4;
+}
+.cst-list li .tag { color: var(--dim); font-size: clamp(9px, 0.8vw, 10px); margin-left: 6px; }
+
+/* ─── SLIDE 5 ─── */
+.q-grid { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 880px; }
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--pink);
+  padding: 10px 16px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.q-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--pink); font-weight: 700;
+  line-height: 1; min-width: 30px;
+}
+.q-text { font-size: clamp(11px, 1.15vw, 13px); color: #ccc; line-height: 1.65; }
+.q-text strong { color: var(--white); }
+.closing {
+  margin-top: 14px;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(13px, 1.5vw, 17px);
+  color: var(--pink);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  width: 100%; max-width: 880px;
+  letter-spacing: 1px;
+}
+
+/* ─── SLIDES 6 & 7 ─── */
+.res-sub {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(10px, 1vw, 12px);
+  color: var(--dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.res-ans-title {
+  font-family: 'Oswald', sans-serif;
+  color: var(--pink);
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.res-list { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.res-list li {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(11px, 1.05vw, 13px);
+  color: var(--white);
+  padding: 5px 10px;
+  border-left: 2px solid rgba(255,45,120,0.5);
+  background: var(--card);
+}
+.res-list li .pk { color: var(--pink); }
+.res-highlight {
+  background: rgba(255,45,120,0.1);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(15px, 1.8vw, 22px);
+  color: var(--pink);
+  font-weight: 700;
+  text-align: center;
+}
+.res-text { font-size: clamp(11px, 1.1vw, 13px); color: #ccc; line-height: 1.7; }
+
+/* ─── SLIDE 7 CONCLUSION ─── */
+.conc-pts { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.conc-pts li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: clamp(11px, 1.15vw, 14px);
+  color: #ccc; line-height: 1.6;
+}
+.conc-pts li::before { content: '▶'; color: var(--pink); font-size: 11px; min-width: 14px; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div id="slideshow">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — CAPA
+  ══════════════════════════════════════════ -->
+  <div class="slide active" id="slide-1">
+    <div class="section-tag">Pesquisa Operacional | Minimização de Custo</div>
+    <div class="capa-title">Programação Linear<br><span>Aplicada à Nutrição</span></div>
+    <div class="capa-divider"></div>
+    <div class="capa-subtitle">Otimização de Plano Alimentar com Restrição Orçamentária</div>
+    <div class="capa-team">
+      <span class="capa-member">André Luiz</span>
+      <span class="capa-member">Carlos Magno</span>
+      <span class="capa-member">Erik Kestring</span>
+      <span class="capa-member">Gabriel Silva</span>
+    </div>
+    <div class="capa-year">2026</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — O PROBLEMA
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-2">
+    <div class="heading">O Problema</div>
+    <div class="prob-desc">
+      Uma nutricionista precisa elaborar um plano alimentar diário para um paciente adulto respeitando as recomendações mínimas da OMS para nutrientes e um orçamento máximo de <strong style="color:var(--pink)">R$20,00</strong> por dia. Os alimentos disponíveis são: arroz, feijão, frango, ovo e brócolis.
+    </div>
+    <div class="info-row">
+      <div class="info-box">
+        <div class="info-label">Objetivo</div>
+        <div class="info-value">Minimizar o custo total do plano alimentar diário, determinando a quantidade ótima — em porções de 100g — de cada alimento.</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Tipo de Problema</div>
+        <div class="info-value">Programação Linear de <span style="color:var(--pink)">minimização</span> com variáveis contínuas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — VARIÁVEIS + TABELA
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-3">
+    <div class="heading">Variáveis de Decisão + Tabela Nutricional</div>
+    <div class="two-col">
+      <div>
+        <div class="col-title">Variáveis de Decisão</div>
+        <p style="font-size:clamp(11px,1.1vw,13px);color:var(--dim);margin-bottom:10px;line-height:1.6;">
+          Cada xᵢ = quantidade em porções de 100g do alimento i consumida por dia:
+        </p>
+        <ul class="var-list">
+          <li><span>x₁</span> = quantidade de arroz</li>
+          <li><span>x₂</span> = quantidade de feijão</li>
+          <li><span>x₃</span> = quantidade de frango</li>
+          <li><span>x₄</span> = quantidade de ovo</li>
+          <li><span>x₅</span> = quantidade de brócolis</li>
+        </ul>
+        <div class="var-constraint">x₁, x₂, x₃, x₄, x₅ ≥ 0</div>
+      </div>
+      <div>
+        <div class="col-title">Tabela Nutricional por 100g</div>
+        <table class="nut-table">
+          <thead>
+            <tr>
+              <th style="text-align:left">Alimento</th>
+              <th>Custo (R$)</th>
+              <th>Prot. (g)</th>
+              <th>Carb. (g)</th>
+              <th>Gord. (g)</th>
+              <th>Fibra (g)</th>
+              <th>Cálcio (mg)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Arroz</td><td>0,40</td><td>2,6</td><td>28,0</td><td>0,3</td><td>0,4</td><td>10</td></tr>
+            <tr><td>Feijão</td><td>0,70</td><td>8,7</td><td>14,0</td><td>0,5</td><td>8,5</td><td>37</td></tr>
+            <tr><td>Frango</td><td>1,20</td><td>21,0</td><td>0,0</td><td>3,0</td><td>0,0</td><td>11</td></tr>
+            <tr><td>Ovo</td><td>0,60</td><td>13,0</td><td>1,0</td><td>10,0</td><td>0,0</td><td>50</td></tr>
+            <tr><td>Brócolis</td><td>0,50</td><td>2,8</td><td>7,0</td><td>0,4</td><td>2,6</td><td>47</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 4 — MODELO MATEMÁTICO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-4">
+    <div class="heading">Modelo Matemático</div>
+    <div class="two-col">
+      <div>
+        <div class="col-title">Função Objetivo</div>
+        <div class="obj-box">
+          <span class="lbl">Minimizar Z =</span>
+          0,40x₁ + 0,70x₂ + 1,20x₃<br>+ 0,60x₄ + 0,50x₅
+        </div>
+      </div>
+      <div>
+        <div class="col-title">Restrições</div>
+        <ul class="cst-list">
+          <li>0,40x₁ + 0,70x₂ + 1,20x₃ + 0,60x₄ + 0,50x₅ ≤ 20 <span class="tag">(orçamento)</span></li>
+          <li>2,6x₁ + 8,7x₂ + 21x₃ + 13x₄ + 2,8x₅ ≥ 50 <span class="tag">(proteína mín. 50g)</span></li>
+          <li>28x₁ + 14x₂ + x₄ + 7x₅ ≥ 250 <span class="tag">(carboidrato mín. 250g)</span></li>
+          <li>0,3x₁ + 0,5x₂ + 3x₃ + 10x₄ + 0,4x₅ ≥ 44 <span class="tag">(gordura mín. 44g)</span></li>
+          <li>0,4x₁ + 8,5x₂ + 2,6x₅ ≥ 25 <span class="tag">(fibra mín. 25g)</span></li>
+          <li>10x₁ + 37x₂ + 11x₃ + 50x₄ + 47x₅ ≥ 1000 <span class="tag">(cálcio mín. 1000mg)</span></li>
+          <li>x₁, x₂, x₃, x₄, x₅ ≥ 0 <span class="tag">(não-negatividade)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 5 — AS 3 PERGUNTAS
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-5">
+    <div class="heading">As 3 Perguntas</div>
+    <div class="q-grid">
+      <div class="q-card">
+        <div class="q-num">1</div>
+        <div class="q-text"><strong>Questão 1:</strong> Qual é a solução ótima do modelo? Quais alimentos devem ser incluídos e em quais quantidades? Qual é o custo mínimo diário?</div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">2</div>
+        <div class="q-text"><strong>Questão 2:</strong> Como a solução ótima se altera se o preço do frango aumentar 20%? O custo do plano muda? Outro alimento passa a ser preferido como fonte proteica?</div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">3</div>
+        <div class="q-text"><strong>Questão 3:</strong> Qual o impacto de eliminar o frango da dieta (x₃ = 0)? O problema continua tendo solução viável? Qual nutriente fica mais comprometido?</div>
+      </div>
+    </div>
+    <div class="closing">Para responder, utilizamos o método Simplex de minimização.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 6 — RESOLUÇÃO Q1 + Q2
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-6">
+    <div class="heading">Resolução — Questões 1 e 2</div>
+    <div class="two-col">
+      <div>
+        <div class="col-title">Questão 1</div>
+        <div class="res-sub">Qual a solução ótima? Quais alimentos e em que quantidades?</div>
+        <div class="res-ans-title">Solução ótima pelo Simplex:</div>
+        <ul class="res-list">
+          <li><span class="pk">x₁</span> = 8,93 porções de arroz (893g)</li>
+          <li><span class="pk">x₂</span> = 1,47 porções de feijão (147g)</li>
+          <li><span class="pk">x₃</span> = 0 &nbsp;(frango não entra)</li>
+          <li><span class="pk">x₄</span> = 0 &nbsp;(ovo não entra)</li>
+          <li><span class="pk">x₅</span> = 2,15 porções de brócolis (215g)</li>
+        </ul>
+        <div class="res-highlight">Custo mínimo: Z = R$ 5,18 / dia</div>
+      </div>
+      <div>
+        <div class="col-title">Questão 2</div>
+        <div class="res-sub">Se o preço do frango aumentar 20%, o plano muda?</div>
+        <div class="res-ans-title">Análise de sensibilidade:</div>
+        <ul class="res-list">
+          <li>Novo custo do frango: R$1,20 × 1,20 = <span class="pk">R$ 1,44</span></li>
+          <li>x₃ = 0 já era a solução original</li>
+        </ul>
+        <div class="res-text" style="margin-top:10px;">
+          O aumento de 20% <strong style="color:var(--white)">não altera a solução nem o custo</strong>. O plano permanece em <span style="color:var(--pink);font-weight:bold">R$5,18/dia</span> com arroz, feijão e brócolis como base.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 7 — Q3 + CONCLUSÃO
+  ══════════════════════════════════════════ -->
+  <div class="slide" id="slide-7">
+    <div class="heading">Questão 3 + Conclusão</div>
+    <div class="two-col">
+      <div>
+        <div class="col-title">Questão 3</div>
+        <div class="res-sub">Qual o impacto de eliminar o frango (x₃ = 0)?</div>
+        <div class="res-text">
+          Como x₃ = 0 já era a solução ótima original, eliminar o frango <strong style="color:var(--white)">não altera o plano</strong>. A solução permanece viável. O nutriente mais comprometido é o <span style="color:var(--pink);font-weight:bold">cálcio</span> — que depende principalmente do brócolis e feijão para atingir os 1000mg mínimos.
+        </div>
+      </div>
+      <div>
+        <div class="col-title">Conclusão</div>
+        <ul class="conc-pts">
+          <li>O Simplex encontrou um plano alimentar completo por apenas <span style="color:var(--pink)">R$5,18/dia</span></li>
+          <li>O frango não entrou na solução por ter custo elevado em relação ao benefício nutricional</li>
+          <li>O cálcio foi o nutriente mais difícil de atingir — <span style="color:var(--pink)">restrição mais crítica</span> do modelo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- #slideshow -->
+
+<div id="nav">
+  <button id="btn-prev" onclick="goSlide(-1)" disabled>◀ ANTERIOR</button>
+  <span id="counter">1 / 7</span>
+  <button id="btn-next" onclick="goSlide(1)">PRÓXIMO ▶</button>
+</div>
+
+<script>
+const TOTAL = 7;
+let current = 1;
+
+function updateProgress() {
+  document.getElementById('progress-bar').style.width = (current / TOTAL * 100) + '%';
+}
+
+function goSlide(dir) {
+  const next = current + dir;
+  if (next < 1 || next > TOTAL) return;
+  document.getElementById('slide-' + current).classList.remove('active');
+  current = next;
+  document.getElementById('slide-' + current).classList.add('active');
+  document.getElementById('counter').textContent = current + ' / ' + TOTAL;
+  document.getElementById('btn-prev').disabled = (current === 1);
+  document.getElementById('btn-next').disabled = (current === TOTAL);
+  updateProgress();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goSlide(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goSlide(-1);
+});
+
+updateProgress();
+</script>
+</body>
+</html>

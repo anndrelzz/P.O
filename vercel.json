@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/gta_po_slides.html" }
+    { "source": "/gta",      "destination": "/gta_po_slides.html" },
+    { "source": "/nutricao", "destination": "/nutricao_po.html"   }
   ]
 }

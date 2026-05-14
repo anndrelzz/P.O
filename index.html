@@ -35,6 +35,41 @@ body.nut-mode #nav button { border-color: var(--pink); color: var(--pink); }
 body.nut-mode #nav button:hover:not(:disabled) { background: var(--pink); color: #000; }
 body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(255,45,120,0.8); }
 
+/* ── NUT LOGO 3D ── */
+@keyframes nut-spin3d {
+  from { transform: perspective(600px) rotateY(0deg)   rotateX(6deg); }
+  to   { transform: perspective(600px) rotateY(360deg) rotateX(6deg); }
+}
+@keyframes nut-glow {
+  0%, 100% { filter: brightness(0.8) contrast(1.4)
+                     drop-shadow(0 0 18px rgba(255,45,120,0.8))
+                     drop-shadow(0 0 40px rgba(255,45,120,0.35)); }
+  50%       { filter: brightness(0.8) contrast(1.4)
+                     drop-shadow(0 0 32px rgba(255,45,120,1))
+                     drop-shadow(0 0 64px rgba(255,45,120,0.6)); }
+}
+.nut-logo-3d-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nut-logo-3d {
+  width: clamp(160px, 20vw, 260px);
+  animation: nut-spin3d 9s linear infinite, nut-glow 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  border-radius: 8px;
+}
+.nut-capa-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 960px;
+}
+
 /* ── NUT TYPOGRAPHY ── */
 .nut-slide .n-tag {
   font-family: 'Oswald', sans-serif;
@@ -317,17 +352,24 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 
   <!-- SLIDE 1 — CAPA NUTRIÇÃO -->
   <div class="slide nut-slide active" id="slide-1">
-    <div class="n-tag">Pesquisa Operacional | Minimização de Custo</div>
-    <div class="n-capa-title">Programação Linear<br><span>Aplicada à Nutrição</span></div>
-    <div class="n-divider"></div>
-    <div class="n-subtitle">Otimização de Plano Alimentar com Restrição Orçamentária</div>
-    <div class="n-team">
-      <span class="n-member">André Luiz</span>
-      <span class="n-member">Carlos Magno</span>
-      <span class="n-member">Erik Kestring</span>
-      <span class="n-member">Gabriel Silva</span>
+    <div class="nut-capa-row">
+      <div class="nut-logo-3d-wrap">
+        <img src="img/brocolis_hero.jpg" class="nut-logo-3d" alt="Brócolis Herói">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;">
+        <div class="n-tag">Pesquisa Operacional | Minimização de Custo</div>
+        <div class="n-capa-title" style="text-align:left;">Programação Linear<br><span>Aplicada à Nutrição</span></div>
+        <div class="n-divider" style="margin:14px 0;"></div>
+        <div class="n-subtitle" style="text-align:left;">Otimização de Plano Alimentar com Restrição Orçamentária</div>
+        <div class="n-team" style="justify-content:flex-start;">
+          <span class="n-member">André Luiz</span>
+          <span class="n-member">Carlos Magno</span>
+          <span class="n-member">Erik Kestring</span>
+          <span class="n-member">Gabriel Silva</span>
+        </div>
+        <div class="n-year">2026</div>
+      </div>
     </div>
-    <div class="n-year">2026</div>
   </div>
 
   <!-- SLIDE 2 — O PROBLEMA -->

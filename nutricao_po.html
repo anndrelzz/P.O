@@ -145,6 +145,41 @@ html, body {
   border-bottom: 1px solid var(--border);
 }
 
+/* ─── LOGO 3D GIRATORIO ─── */
+@keyframes nut-spin3d {
+  from { transform: perspective(600px) rotateY(0deg)   rotateX(6deg); }
+  to   { transform: perspective(600px) rotateY(360deg) rotateX(6deg); }
+}
+@keyframes nut-glow {
+  0%, 100% { filter: brightness(0.8) contrast(1.4)
+                     drop-shadow(0 0 18px rgba(255,45,120,0.8))
+                     drop-shadow(0 0 40px rgba(255,45,120,0.35)); }
+  50%       { filter: brightness(0.8) contrast(1.4)
+                     drop-shadow(0 0 32px rgba(255,45,120,1))
+                     drop-shadow(0 0 64px rgba(255,45,120,0.6)); }
+}
+.nut-logo-3d-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nut-logo-3d {
+  width: clamp(160px, 20vw, 260px);
+  animation: nut-spin3d 9s linear infinite, nut-glow 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  border-radius: 8px;
+}
+.nut-capa-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 960px;
+}
+
 /* ─── SLIDE 1 — CAPA ─── */
 .capa-title {
   font-family: 'Oswald', sans-serif;
@@ -371,17 +406,24 @@ html, body {
        SLIDE 1 — CAPA
   ══════════════════════════════════════════ -->
   <div class="slide active" id="slide-1">
-    <div class="section-tag">Pesquisa Operacional | Minimização de Custo</div>
-    <div class="capa-title">Programação Linear<br><span>Aplicada à Nutrição</span></div>
-    <div class="capa-divider"></div>
-    <div class="capa-subtitle">Otimização de Plano Alimentar com Restrição Orçamentária</div>
-    <div class="capa-team">
-      <span class="capa-member">André Luiz</span>
-      <span class="capa-member">Carlos Magno</span>
-      <span class="capa-member">Erik Kestring</span>
-      <span class="capa-member">Gabriel Silva</span>
+    <div class="nut-capa-row">
+      <div class="nut-logo-3d-wrap">
+        <img src="img/brocolis_hero.jpg" class="nut-logo-3d" alt="Brócolis Herói">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;">
+        <div class="section-tag">Pesquisa Operacional | Minimização de Custo</div>
+        <div class="capa-title" style="text-align:left;">Programação Linear<br><span>Aplicada à Nutrição</span></div>
+        <div class="capa-divider" style="margin:14px 0;"></div>
+        <div class="capa-subtitle" style="text-align:left;">Otimização de Plano Alimentar com Restrição Orçamentária</div>
+        <div class="capa-team" style="justify-content:flex-start;">
+          <span class="capa-member">André Luiz</span>
+          <span class="capa-member">Carlos Magno</span>
+          <span class="capa-member">Erik Kestring</span>
+          <span class="capa-member">Gabriel Silva</span>
+        </div>
+        <div class="capa-year">2026</div>
+      </div>
     </div>
-    <div class="capa-year">2026</div>
   </div>
 
   <!-- ══════════════════════════════════════════

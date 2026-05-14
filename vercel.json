@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/gta_po_slides.html" }
+  ]
+}

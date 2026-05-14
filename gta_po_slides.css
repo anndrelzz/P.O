@@ -64,6 +64,12 @@ html, body {
   opacity: 1;
   pointer-events: all;
 }
+#slide-12 {
+  overflow-y: auto;
+  justify-content: flex-start;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
 /* ── SCANLINE OVERLAY ── */
 #slideshow::after {
@@ -703,43 +709,42 @@ html, body {
 .conclusion-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 8px;
   width: 100%;
   max-width: 1000px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .conc-card {
   border: 1px solid rgba(245,197,24,0.35);
   background: rgba(245,197,24,0.04);
-  padding: 12px 14px;
+  padding: 8px 10px;
   border-top: 2px solid var(--yellow);
 }
 
 /* ── CONCLUSION IMAGES STRIP ── */
 .conc-images {
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
   width: 100%;
   max-width: 1000px;
-  height: clamp(110px, 16vh, 170px);
-  overflow: hidden;
-  gap: 0;
-  border: 1px solid rgba(245,197,24,0.2);
+  gap: 12px;
 }
 .conc-img-dinner {
-  flex: 2.5;
-  object-fit: cover;
-  object-position: center 30%;
+  max-height: 300px;
+  width: auto;
   display: block;
+  border: 1px solid rgba(245,197,24,0.2);
 }
 .conc-img-mission {
-  flex: 1;
-  object-fit: cover;
-  object-position: center center;
+  max-height: 300px;
+  width: auto;
   display: block;
-  border-left: 2px solid rgba(245,197,24,0.3);
+  border: 1px solid rgba(245,197,24,0.2);
 }
 .conc-title {
-  font-size: clamp(12px, 1.3vw, 15px);
+  font-size: clamp(13px, 1.4vw, 16px);
   color: var(--yellow);
   font-weight: 900;
   margin-bottom: 6px;
@@ -747,8 +752,8 @@ html, body {
   letter-spacing: 1px;
 }
 .conc-text {
-  font-size: clamp(11px, 1.05vw, 13px);
-  color: var(--dim);
+  font-size: clamp(12px, 1.2vw, 14px);
+  color: #ffffff;
   line-height: 1.6;
 }
 .final-phrase {
@@ -762,6 +767,43 @@ html, body {
   font-style: italic;
   text-align: center;
   line-height: 1.7;
+}
+
+.conc-fim {
+  font-size: clamp(48px, 7vw, 90px);
+  font-weight: 900;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 16px;
+  text-shadow: 0 0 40px rgba(245,197,24,0.4);
+}
+.conc-obrigado {
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  opacity: 0.9;
+}
+
+.conc-phrase {
+  max-width: 860px;
+  width: 100%;
+  border: 2px solid var(--yellow);
+  background: rgba(245,197,24,0.04);
+  padding: 14px 24px;
+  font-size: clamp(13px, 1.5vw, 17px);
+  color: var(--yellow);
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1.6;
+  margin-top: 12px;
 }
 
 /* ── RESPONSIVE ── */

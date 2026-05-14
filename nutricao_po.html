@@ -103,7 +103,7 @@ html, body {
 /* ─── TYPOGRAPHY ─── */
 .section-tag {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(12px, 1.3vw, 15px);
   color: var(--pink);
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -112,7 +112,7 @@ html, body {
 }
 .heading {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(20px, 2.8vw, 36px);
+  font-size: clamp(26px, 3.8vw, 48px);
   font-weight: 700;
   color: var(--pink);
   text-transform: uppercase;
@@ -122,6 +122,7 @@ html, body {
   border-bottom: 2px solid var(--border);
   width: 100%;
   text-align: center;
+  text-shadow: 0 0 20px rgba(255,45,120,0.4);
 }
 
 /* ─── TWO-COLUMN ─── */
@@ -135,12 +136,12 @@ html, body {
 }
 .col-title {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(11px, 1.2vw, 14px);
+  font-size: clamp(16px, 1.9vw, 22px);
   color: var(--pink);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
 }
@@ -193,7 +194,7 @@ html, body {
 .capa-title span { color: var(--pink); }
 .capa-divider { width: 80px; height: 2px; background: var(--pink); margin: 14px auto; opacity: 0.6; }
 .capa-subtitle {
-  font-size: clamp(13px, 1.5vw, 18px);
+  font-size: clamp(15px, 1.8vw, 22px);
   color: var(--dim);
   text-align: center;
   line-height: 1.7;
@@ -205,11 +206,11 @@ html, body {
   justify-content: center; gap: 8px 24px;
   margin-bottom: 12px;
 }
-.capa-member { font-size: clamp(11px, 1.1vw, 13px); color: var(--dim); letter-spacing: 1px; }
+.capa-member { font-size: clamp(13px, 1.3vw, 16px); color: var(--dim); letter-spacing: 1px; }
 .capa-year {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(13px, 1.4vw, 16px);
-  color: rgba(255,45,120,0.5);
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: rgba(255,45,120,0.6);
   letter-spacing: 4px;
 }
 
@@ -217,12 +218,12 @@ html, body {
 .prob-desc {
   background: var(--card);
   border-left: 3px solid var(--pink);
-  padding: 14px 18px;
-  margin-bottom: 12px;
+  padding: 16px 22px;
+  margin-bottom: 14px;
   max-width: 840px; width: 100%;
-  font-size: clamp(12px, 1.25vw, 14px);
+  font-size: clamp(15px, 1.7vw, 20px);
   color: #ccc;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 .info-row {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -231,122 +232,129 @@ html, body {
 .info-box {
   background: var(--card);
   border: 1px solid var(--border);
-  padding: 12px 16px;
+  padding: 14px 18px;
 }
 .info-label {
   font-family: 'Oswald', sans-serif;
   color: var(--pink);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(12px, 1.3vw, 15px);
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-.info-value { font-size: clamp(12px, 1.2vw, 14px); color: var(--white); line-height: 1.6; }
+.info-value { font-size: clamp(14px, 1.6vw, 18px); color: var(--white); line-height: 1.7; }
 
 /* ─── SLIDE 3 ─── */
 .var-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .var-list li {
-  font-size: clamp(12px, 1.2vw, 14px);
+  font-size: clamp(14px, 1.6vw, 18px);
   color: var(--white);
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-left: 2px solid var(--pink);
   background: var(--card);
 }
-.var-list li span { color: var(--pink); }
+.var-list li span { color: var(--pink); font-weight: bold; }
 .var-constraint {
-  font-size: clamp(11px, 1.1vw, 13px);
+  font-size: clamp(13px, 1.4vw, 16px);
   color: var(--dim);
   margin-top: 8px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border: 1px solid var(--border);
 }
 .nut-table { width: 100%; border-collapse: collapse; }
 .nut-table th {
   font-family: 'Oswald', sans-serif;
   color: var(--pink);
-  font-size: clamp(9px, 0.9vw, 11px);
+  font-size: clamp(12px, 1.3vw, 15px);
   letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 7px 6px;
+  padding: 9px 8px;
   border-bottom: 2px solid var(--border);
   text-align: center;
-  background: rgba(255,45,120,0.05);
+  background: rgba(255,45,120,0.08);
 }
 .nut-table td {
-  font-size: clamp(11px, 1vw, 12px);
+  font-size: clamp(13px, 1.4vw, 16px);
   color: var(--white);
-  padding: 6px 6px;
+  padding: 8px 8px;
   text-align: center;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .nut-table tr:hover td { background: rgba(255,45,120,0.06); }
-.nut-table td:first-child { color: var(--pink); text-align: left; }
+.nut-table td:first-child { color: var(--pink); text-align: left; font-weight: bold; }
 
 /* ─── SLIDE 4 ─── */
 .obj-box {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(12px, 1.3vw, 15px);
+  font-size: clamp(15px, 1.7vw, 20px);
   background: var(--card);
   border: 1px solid var(--border);
   border-left: 3px solid var(--pink);
-  padding: 14px 18px;
+  padding: 16px 22px;
   line-height: 2.2;
-  color: var(--white);
+  color: var(--pink);
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255,45,120,0.3);
 }
 .obj-box .lbl {
   font-family: 'Oswald', sans-serif;
   color: var(--pink);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(12px, 1.3vw, 15px);
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 8px;
   display: block;
+  opacity: 0.75;
+  font-weight: 400;
+  text-shadow: none;
 }
-.cst-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.cst-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .cst-list li {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(10px, 0.95vw, 12px);
+  font-size: clamp(13px, 1.4vw, 16px);
   color: var(--white);
-  padding: 5px 10px;
-  border-left: 2px solid rgba(255,45,120,0.4);
+  padding: 7px 12px;
+  border-left: 2px solid rgba(255,45,120,0.5);
   background: var(--card);
-  line-height: 1.4;
+  line-height: 1.5;
 }
-.cst-list li .tag { color: var(--dim); font-size: clamp(9px, 0.8vw, 10px); margin-left: 6px; }
+.cst-list li .tag { color: var(--pink); font-size: clamp(11px, 1.1vw, 13px); margin-left: 8px; opacity: 0.65; }
 
 /* ─── SLIDE 5 ─── */
-.q-grid { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 880px; }
+.q-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 880px; }
 .q-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-left: 3px solid var(--pink);
-  padding: 10px 16px;
-  display: flex; gap: 14px; align-items: flex-start;
+  padding: 14px 18px;
+  display: flex; gap: 16px; align-items: flex-start;
 }
 .q-num {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(24px, 3vw, 36px);
+  font-size: clamp(26px, 3.2vw, 40px);
   color: var(--pink); font-weight: 700;
-  line-height: 1; min-width: 30px;
+  line-height: 1; min-width: 32px;
 }
-.q-text { font-size: clamp(11px, 1.15vw, 13px); color: #ccc; line-height: 1.65; }
+.q-text { font-size: clamp(14px, 1.6vw, 18px); color: #ccc; line-height: 1.75; }
 .q-text strong { color: var(--white); }
 .closing {
   margin-top: 14px;
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(13px, 1.5vw, 17px);
+  font-size: clamp(15px, 1.7vw, 20px);
   color: var(--pink);
   text-align: center;
   border-top: 1px solid var(--border);
   padding-top: 12px;
   width: 100%; max-width: 880px;
   letter-spacing: 1px;
+  font-weight: 600;
+  text-shadow: 0 0 12px rgba(255,45,120,0.4);
 }
 
 /* ─── SLIDES 6 & 7 ─── */
 .res-sub {
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(13px, 1.3vw, 15px);
   color: var(--dim);
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -356,44 +364,46 @@ html, body {
 .res-ans-title {
   font-family: 'Oswald', sans-serif;
   color: var(--pink);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(13px, 1.4vw, 16px);
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
-.res-list { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.res-list { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
 .res-list li {
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(11px, 1.05vw, 13px);
+  font-size: clamp(14px, 1.5vw, 17px);
   color: var(--white);
-  padding: 5px 10px;
+  padding: 7px 12px;
   border-left: 2px solid rgba(255,45,120,0.5);
   background: var(--card);
 }
-.res-list li .pk { color: var(--pink); }
+.res-list li .pk { color: var(--pink); font-weight: bold; }
 .res-highlight {
-  background: rgba(255,45,120,0.1);
-  border: 1px solid var(--border);
-  padding: 8px 14px;
+  background: rgba(255,45,120,0.12);
+  border: 2px solid var(--border);
+  padding: 10px 16px;
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(15px, 1.8vw, 22px);
+  font-size: clamp(18px, 2.2vw, 28px);
   color: var(--pink);
   font-weight: 700;
   text-align: center;
+  text-shadow: 0 0 16px rgba(255,45,120,0.5);
+  letter-spacing: 1px;
 }
-.res-text { font-size: clamp(11px, 1.1vw, 13px); color: #ccc; line-height: 1.7; }
+.res-text { font-size: clamp(14px, 1.6vw, 18px); color: #ccc; line-height: 1.8; }
 
 /* ─── SLIDE 7 CONCLUSION ─── */
-.conc-pts { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.conc-pts { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .conc-pts li {
-  display: flex; gap: 10px; align-items: flex-start;
-  padding: 10px 14px;
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 16px;
   background: var(--card);
   border: 1px solid var(--border);
-  font-size: clamp(11px, 1.15vw, 14px);
-  color: #ccc; line-height: 1.6;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #ccc; line-height: 1.7;
 }
-.conc-pts li::before { content: '▶'; color: var(--pink); font-size: 11px; min-width: 14px; margin-top: 3px; }
+.conc-pts li::before { content: '▶'; color: var(--pink); font-size: 13px; min-width: 16px; margin-top: 3px; }
 </style>
 </head>
 <body>
@@ -454,7 +464,7 @@ html, body {
     <div class="two-col">
       <div>
         <div class="col-title">Variáveis de Decisão</div>
-        <p style="font-size:clamp(11px,1.1vw,13px);color:var(--dim);margin-bottom:10px;line-height:1.6;">
+        <p style="font-size:clamp(14px,1.5vw,17px);color:var(--dim);margin-bottom:10px;line-height:1.6;">
           Cada xᵢ = quantidade em porções de 100g do alimento i consumida por dia:
         </p>
         <ul class="var-list">

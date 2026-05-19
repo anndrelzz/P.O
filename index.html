@@ -13,7 +13,7 @@
 
 /* ── NUTRITION SLIDES — scoped under .nut-slide ── */
 .nut-slide {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* Pink corner decorations for nutrition slides */
@@ -30,10 +30,12 @@
 .nut-slide::after  { bottom: 60px; right: 14px; border-width: 0 2px 2px 0; }
 
 /* Override nav border for nutrition slides — handled via JS class toggle */
-body.nut-mode #nav { border-top-color: var(--pink); }
-body.nut-mode #nav button { border-color: var(--pink); color: var(--pink); }
-body.nut-mode #nav button:hover:not(:disabled) { background: var(--pink); color: #000; }
+body.nut-mode #btn-prev,
+body.nut-mode #btn-next { border-color: var(--pink); color: var(--pink); }
+body.nut-mode #btn-prev:hover:not(:disabled),
+body.nut-mode #btn-next:hover:not(:disabled) { background: var(--pink); color: #000; }
 body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(255,45,120,0.8); }
+body.nut-mode #rockstar-logo { display: none; }
 
 /* ── NUT LOGO 3D ── */
 @keyframes nut-spin3d {
@@ -72,8 +74,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 
 /* ── NUT TYPOGRAPHY ── */
 .nut-slide .n-tag {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(10px, 1vw, 12px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
   color: var(--pink);
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -81,9 +83,9 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   opacity: 0.8;
 }
 .nut-slide .n-heading {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(20px, 2.8vw, 36px);
-  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(28px, 4.2vw, 54px);
+  font-weight: 900;
   color: var(--pink);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -102,10 +104,10 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   align-items: start;
 }
 .nut-slide .n-col-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(11px, 1.2vw, 14px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(16px, 1.8vw, 20px);
   color: var(--pink);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 10px;
@@ -114,20 +116,20 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 }
 .nut-slide .n-card { background: rgba(255,45,120,0.05); border: 1px solid rgba(255,45,120,0.3); padding: 12px 16px; }
 .nut-slide .n-label {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   color: var(--pink);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 4px;
 }
-.nut-slide .n-value { font-size: clamp(12px, 1.2vw, 14px); color: var(--white); line-height: 1.6; }
+.nut-slide .n-value { font-size: clamp(17px, 2vw, 22px); color: var(--white); line-height: 1.6; }
 
 /* ── CAPA ── */
 .nut-slide .n-capa-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(28px, 4.2vw, 54px);
-  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(34px, 5.5vw, 68px);
+  font-weight: 900;
   color: var(--white);
   text-align: center;
   line-height: 1.1;
@@ -136,7 +138,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 .nut-slide .n-capa-title span { color: var(--pink); }
 .nut-slide .n-divider { width: 80px; height: 2px; background: var(--pink); margin: 14px auto; opacity: 0.6; }
 .nut-slide .n-subtitle {
-  font-size: clamp(13px, 1.5vw, 18px);
+  font-size: clamp(17px, 2vw, 22px);
   color: var(--dim);
   text-align: center;
   line-height: 1.7;
@@ -144,10 +146,10 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   margin-bottom: 18px;
 }
 .nut-slide .n-team { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-bottom: 12px; }
-.nut-slide .n-member { font-size: clamp(11px, 1.1vw, 13px); color: var(--dim); letter-spacing: 1px; }
+.nut-slide .n-member { font-size: clamp(16px, 1.7vw, 19px); color: var(--dim); letter-spacing: 1px; }
 .nut-slide .n-year {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(16px, 1.8vw, 20px);
   color: rgba(255,45,120,0.5);
   letter-spacing: 4px;
 }
@@ -159,7 +161,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   padding: 14px 18px;
   margin-bottom: 12px;
   max-width: 840px; width: 100%;
-  font-size: clamp(12px, 1.25vw, 14px);
+  font-size: clamp(17px, 2vw, 22px);
   color: #ccc;
   line-height: 1.7;
 }
@@ -168,7 +170,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 /* ── VARS ── */
 .nut-slide .n-var-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .nut-slide .n-var-list li {
-  font-size: clamp(12px, 1.2vw, 14px);
+  font-size: clamp(17px, 2vw, 22px);
   color: var(--white);
   padding: 6px 12px;
   border-left: 2px solid var(--pink);
@@ -176,7 +178,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 }
 .nut-slide .n-var-list li span { color: var(--pink); }
 .nut-slide .n-var-constraint {
-  font-size: clamp(11px, 1.1vw, 13px);
+  font-size: clamp(16px, 1.7vw, 19px);
   color: var(--dim);
   margin-top: 8px;
   padding: 6px 12px;
@@ -186,9 +188,9 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 /* ── TABLE ── */
 .nut-slide .n-table { width: 100%; border-collapse: collapse; }
 .nut-slide .n-table th {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   color: var(--pink);
-  font-size: clamp(9px, 0.9vw, 11px);
+  font-size: clamp(16px, 1.8vw, 20px);
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 7px 6px;
@@ -197,7 +199,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   background: rgba(255,45,120,0.05);
 }
 .nut-slide .n-table td {
-  font-size: clamp(11px, 1vw, 12px);
+  font-size: clamp(17px, 2vw, 22px);
   color: var(--white);
   padding: 6px 6px;
   text-align: center;
@@ -208,8 +210,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 
 /* ── MODEL ── */
 .nut-slide .n-obj-box {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(12px, 1.3vw, 15px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(17px, 2vw, 22px);
   background: rgba(255,45,120,0.05);
   border: 1px solid rgba(255,45,120,0.3);
   border-left: 3px solid var(--pink);
@@ -218,9 +220,9 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   color: var(--white);
 }
 .nut-slide .n-obj-box .n-lbl {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   color: var(--pink);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -228,15 +230,15 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 }
 .nut-slide .n-cst-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 .nut-slide .n-cst-list li {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(10px, 0.95vw, 12px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(16px, 1.8vw, 20px);
   color: var(--white);
   padding: 5px 10px;
   border-left: 2px solid rgba(255,45,120,0.4);
   background: rgba(255,45,120,0.05);
   line-height: 1.4;
 }
-.nut-slide .n-cst-list li .n-tag { color: var(--dim); font-size: clamp(9px, 0.8vw, 10px); margin-left: 6px; }
+.nut-slide .n-cst-list li .n-tag { color: var(--dim); font-size: 15px; margin-left: 6px; }
 
 /* ── QUESTIONS ── */
 .nut-slide .n-q-grid { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 880px; }
@@ -248,17 +250,17 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   display: flex; gap: 14px; align-items: flex-start;
 }
 .nut-slide .n-q-num {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(24px, 3vw, 36px);
-  color: var(--pink); font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(27px, 3.7vw, 44px);
+  color: var(--pink); font-weight: 900;
   line-height: 1; min-width: 30px;
 }
-.nut-slide .n-q-text { font-size: clamp(11px, 1.15vw, 13px); color: #ccc; line-height: 1.65; }
+.nut-slide .n-q-text { font-size: clamp(16px, 1.8vw, 20px); color: #ccc; line-height: 1.65; }
 .nut-slide .n-q-text strong { color: var(--white); }
 .nut-slide .n-closing {
   margin-top: 14px;
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(13px, 1.5vw, 17px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(17px, 2vw, 22px);
   color: var(--pink);
   text-align: center;
   border-top: 1px solid rgba(255,45,120,0.3);
@@ -269,8 +271,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 
 /* ── RESOLUTION ── */
 .nut-slide .n-res-sub {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(10px, 1vw, 12px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
   color: var(--dim);
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -278,17 +280,17 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   margin-bottom: 8px;
 }
 .nut-slide .n-ans-title {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   color: var(--pink);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 6px;
 }
 .nut-slide .n-res-list { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
 .nut-slide .n-res-list li {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(11px, 1.05vw, 13px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(16px, 1.8vw, 20px);
   color: var(--white);
   padding: 5px 10px;
   border-left: 2px solid rgba(255,45,120,0.5);
@@ -299,13 +301,13 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   background: rgba(255,45,120,0.1);
   border: 1px solid rgba(255,45,120,0.3);
   padding: 8px 14px;
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(15px, 1.8vw, 22px);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(20px, 2.5vw, 30px);
   color: var(--pink);
   font-weight: 700;
   text-align: center;
 }
-.nut-slide .n-text { font-size: clamp(11px, 1.1vw, 13px); color: #ccc; line-height: 1.7; }
+.nut-slide .n-text { font-size: clamp(16px, 1.8vw, 20px); color: #ccc; line-height: 1.7; }
 
 /* ── CONCLUSION POINTS ── */
 .nut-slide .n-conc-pts { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -314,13 +316,13 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
   padding: 10px 14px;
   background: rgba(255,45,120,0.05);
   border: 1px solid rgba(255,45,120,0.3);
-  font-size: clamp(11px, 1.15vw, 14px);
+  font-size: clamp(16px, 1.8vw, 20px);
   color: #ccc; line-height: 1.6;
 }
-.nut-slide .n-conc-pts li::before { content: '▶'; color: var(--pink); font-size: 11px; min-width: 14px; margin-top: 3px; }
+.nut-slide .n-conc-pts li::before { content: '▶'; color: var(--pink); font-size: 16px; min-width: 14px; margin-top: 3px; }
 
-/* ── GTA SLIDE-19 (conclusion) specific ── */
-#slide-19 {
+/* ── GTA SLIDE-20 (conclusion) specific ── */
+#slide-20 {
   overflow-y: auto;
   justify-content: flex-start;
   padding-top: 20px;
@@ -343,6 +345,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 <body>
 
 <div id="progress-bar"></div>
+<img id="rockstar-logo" src="img/rockstar_logo.jpg" alt="Rockstar Games">
 
 <div id="slideshow">
 
@@ -352,6 +355,7 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 
   <!-- SLIDE 1 — CAPA NUTRIÇÃO -->
   <div class="slide nut-slide active" id="slide-1">
+    <img src="img/catolica_logo.png" alt="Católica SC" style="position:absolute;top:10px;right:10px;width:clamp(70px,7vw,100px);opacity:0.92;pointer-events:none;">
     <div class="nut-capa-row">
       <div class="nut-logo-3d-wrap">
         <img src="img/brocolis_hero.jpg" class="nut-logo-3d" alt="Brócolis Herói">
@@ -638,13 +642,13 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
         <div class="model-half-title">Restrições</div>
         <div class="formula-rest">
           <span class="cm">// tempo (horas)</span><br>
-          15x₁+30x₂+40x₃+50x₄+20x₅ ≤ 120<br><br>
+          15x₁+30x₂+40x₃+50x₄+20x₅ ≤ 120<br>
           <span class="cm">// suborno ($k)</span><br>
-          8x₁+20x₂+35x₃+50x₄+10x₅ ≤ 100<br><br>
+          8x₁+20x₂+35x₃+50x₄+10x₅ ≤ 100<br>
           <span class="cm">// reputação (pts)</span><br>
-          x₁+2x₂+3x₃+4x₄+3x₅ ≥ 8<br><br>
+          x₁+2x₂+3x₃+4x₄+3x₅ ≥ 8<br>
           <span class="cm">// limites individuais</span><br>
-          x₄ ≤ 1 &nbsp;·&nbsp; x₅ ≤ 3 &nbsp;·&nbsp; x₁ ≥ 2<br><br>
+          x₄ ≤ 1 &nbsp;·&nbsp; x₅ ≤ 3 &nbsp;·&nbsp; x₁ ≥ 2<br>
           <span class="cm">// integralidade</span><br>
           x₁, x₂, x₃, x₄, x₅ ∈ ℤ⁺
         </div>
@@ -680,31 +684,44 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
         <div class="bb-step"><span class="bb-num">3</span><span class="bb-text"><span class="highlight">Branch:</span> cria dois mundos paralelos — <span class="green">x₃ ≤ 0</span> (não faz o hack) e <span class="red-text">x₃ ≥ 1</span> (faz pelo menos 1 hack). Cada ramo é um subproblema independente.</span></div>
         <div class="bb-step"><span class="bb-num">4</span><span class="bb-text"><span class="highlight">Poda:</span> descarta ramos <span class="red-text">inviáveis</span> (violam restrições) ou com <span class="red-text">lucro menor</span> que a melhor solução inteira já encontrada.</span></div>
       </div>
-      <div class="bb-tree-wrap">
-        <svg viewBox="0 0 820 195" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New',monospace">
-          <rect x="300" y="4" width="220" height="46" rx="4" fill="#1a1a00" stroke="#f5c518" stroke-width="1.5"/>
-          <text x="410" y="23" text-anchor="middle" fill="#f5c518" font-size="11" font-weight="bold">LP Relaxado</text>
-          <text x="410" y="42" text-anchor="middle" fill="#39ff14" font-size="10">x₃ = 0.97 (fração!) — Z* ≈ 269k</text>
-          <line x1="355" y1="50" x2="195" y2="100" stroke="#f5c518" stroke-width="1" stroke-dasharray="4,3"/>
-          <line x1="465" y1="50" x2="625" y2="100" stroke="#f5c518" stroke-width="1" stroke-dasharray="4,3"/>
-          <text x="250" y="86" fill="#39ff14" font-size="10" font-weight="bold">x₃ = 0</text>
-          <text x="525" y="86" fill="#ff2222" font-size="10" font-weight="bold">x₃ ≥ 1</text>
-          <rect x="90" y="100" width="210" height="46" rx="4" fill="#0a2a0a" stroke="#39ff14" stroke-width="2"/>
-          <text x="195" y="119" text-anchor="middle" fill="#39ff14" font-size="11" font-weight="bold">x₅ = 2 (inteiro ✓)</text>
-          <text x="195" y="137" text-anchor="middle" fill="#39ff14" font-size="10">Z = 260k → candidato à ótima</text>
-          <rect x="520" y="100" width="210" height="46" rx="4" fill="#1a0000" stroke="#ff2222" stroke-width="1.5"/>
-          <text x="625" y="119" text-anchor="middle" fill="#ff2222" font-size="11" font-weight="bold">Suborno = $101k</text>
-          <text x="625" y="137" text-anchor="middle" fill="#ff2222" font-size="10">&gt; $100k → Inviável — podado ✗</text>
-          <line x1="195" y1="146" x2="195" y2="166" stroke="#39ff14" stroke-width="1.5"/>
-          <rect x="70" y="166" width="250" height="26" rx="4" fill="#0a2a0a" stroke="#39ff14" stroke-width="2"/>
-          <text x="195" y="183" text-anchor="middle" fill="#39ff14" font-size="11" font-weight="bold">✓ SOLUÇÃO ÓTIMA → $260k</text>
-        </svg>
-      </div>
     </div>
   </div>
 
-  <!-- SLIDE 15 — DE ONDE VEM O 0.97 -->
+  <!-- SLIDE 15 — ÁRVORE B&B -->
   <div class="slide" id="slide-15">
+    <div class="mission-tag">— Método de Resolução —</div>
+    <div class="slide-heading">Árvore Branch &amp; Bound</div>
+    <div style="width:100%;display:flex;justify-content:center;align-items:center;margin-top:12px;">
+      <svg viewBox="0 0 820 285" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New',monospace" style="width:90%;height:65vh;">
+        <!-- Raiz: LP Relaxado -->
+        <rect x="280" y="8" width="260" height="62" rx="6" fill="#1a1a00" stroke="#f5c518" stroke-width="2"/>
+        <text x="410" y="32" text-anchor="middle" fill="#f5c518" font-size="16" font-weight="bold">LP Relaxado</text>
+        <text x="410" y="56" text-anchor="middle" fill="#39ff14" font-size="13">x₃ = 0.97 (fração!) — Z* ≈ 269k</text>
+        <!-- Linhas de branch -->
+        <line x1="410" y1="70" x2="220" y2="132" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <line x1="410" y1="70" x2="600" y2="132" stroke="#f5c518" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <!-- Labels dos ramos -->
+        <text x="288" y="108" fill="#39ff14" font-size="13" font-weight="bold">x₃ = 0</text>
+        <text x="500" y="108" fill="#ff2222" font-size="13" font-weight="bold">x₃ ≥ 1</text>
+        <!-- Nó esquerdo (viável) -->
+        <rect x="100" y="132" width="240" height="62" rx="6" fill="#0a2a0a" stroke="#39ff14" stroke-width="2.5"/>
+        <text x="220" y="157" text-anchor="middle" fill="#39ff14" font-size="15" font-weight="bold">x₅ = 2 (inteiro ✓)</text>
+        <text x="220" y="180" text-anchor="middle" fill="#39ff14" font-size="13">Z = 260k → candidato à ótima</text>
+        <!-- Nó direito (inviável) -->
+        <rect x="480" y="132" width="240" height="62" rx="6" fill="#1a0000" stroke="#ff2222" stroke-width="2"/>
+        <text x="600" y="157" text-anchor="middle" fill="#ff2222" font-size="15" font-weight="bold">Suborno = $101k</text>
+        <text x="600" y="180" text-anchor="middle" fill="#ff2222" font-size="13">&gt; $100k → Inviável — podado ✗</text>
+        <!-- Linha para solução ótima -->
+        <line x1="220" y1="194" x2="220" y2="222" stroke="#39ff14" stroke-width="2"/>
+        <!-- Solução ótima -->
+        <rect x="80" y="222" width="280" height="50" rx="6" fill="#0a2a0a" stroke="#39ff14" stroke-width="2.5"/>
+        <text x="220" y="254" text-anchor="middle" fill="#39ff14" font-size="16" font-weight="bold">✓ SOLUÇÃO ÓTIMA → $260k</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SLIDE 16 — DE ONDE VEM O 0.97 -->
+  <div class="slide" id="slide-16">
     <div class="mission-tag">— Análise Matemática —</div>
     <div class="slide-heading">De Onde Vem o 0.97?</div>
     <div style="font-size:clamp(14px,1.6vw,17px);color:var(--dim);margin-bottom:16px;text-align:center;">A relaxação linear com a conta exata:</div>
@@ -719,8 +736,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
     </div>
   </div>
 
-  <!-- SLIDE 16 — RESOLUÇÃO PASSO A PASSO -->
-  <div class="slide" id="slide-16">
+  <!-- SLIDE 17 — RESOLUÇÃO PASSO A PASSO -->
+  <div class="slide" id="slide-17">
     <div class="mission-tag">— Resolução —</div>
     <div class="slide-heading">Resolução Passo a Passo</div>
     <div class="bb-container">
@@ -737,8 +754,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
     </div>
   </div>
 
-  <!-- SLIDE 17 — QUESTÃO 1 RESPOSTA -->
-  <div class="slide" id="slide-17">
+  <!-- SLIDE 18 — QUESTÃO 1 RESPOSTA -->
+  <div class="slide" id="slide-18">
     <div class="mission-tag">— Missão Concluída —</div>
     <div class="slide-heading">Questão 1: Resposta</div>
     <div class="question-quote">"Encontre a solução ótima que maximiza o lucro total respeitando todas as restrições. Qual é o lucro máximo?"</div>
@@ -769,8 +786,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
     </div>
   </div>
 
-  <!-- SLIDE 18 — QUESTÃO 2 RESPOSTA -->
-  <div class="slide" id="slide-18">
+  <!-- SLIDE 19 — QUESTÃO 2 RESPOSTA -->
+  <div class="slide" id="slide-19">
     <div class="mission-tag">— Análise de Contingência —</div>
     <div class="slide-heading">Questão 2: Resposta</div>
     <div class="question-quote">"Suponha que o negociador fugiu e x₄ = 0. Existe solução viável? Qual é o novo lucro máximo?"</div>
@@ -799,8 +816,8 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
     </div>
   </div>
 
-  <!-- SLIDE 19 — CONCLUSÃO GTA -->
-  <div class="slide" id="slide-19">
+  <!-- SLIDE 20 — CONCLUSÃO GTA -->
+  <div class="slide" id="slide-20">
     <div class="conc-fim">FIM DA MISSÃO</div>
     <div class="conc-obrigado">Obrigado pela atenção</div>
     <div class="conc-images">
@@ -815,15 +832,13 @@ body.nut-mode #progress-bar { background: var(--pink); box-shadow: 0 0 8px rgba(
 </div><!-- #slideshow -->
 
 <!-- ── NAVIGATION ── -->
-<div id="nav">
-  <button id="btn-prev" onclick="goSlide(-1)" disabled>◀ ANTERIOR</button>
-  <span id="counter">1 / 19</span>
-  <button id="btn-next" onclick="goSlide(1)">PRÓXIMO ▶</button>
-</div>
+<button id="btn-prev" onclick="goSlide(-1)" disabled>‹</button>
+<span id="counter">1 / 20</span>
+<button id="btn-next" onclick="goSlide(1)">›</button>
 
 <script>
-const TOTAL = 19;
-const NUT_END = 7; // nutrition slides are 1–7, GTA is 8–19
+const TOTAL = 20;
+const NUT_END = 7; // nutrition slides are 1–7, GTA is 8–20
 let current = 1;
 
 function updateMode() {

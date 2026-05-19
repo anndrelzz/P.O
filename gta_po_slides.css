@@ -22,14 +22,13 @@ html, body {
 /* ── ROCKSTAR LOGO ── */
 #rockstar-logo {
   position: fixed;
-  top: 8px;
-  right: 8px;
-  width: clamp(60px, 6vw, 88px);
-  opacity: 0.92;
+  top: 10px;
+  right: 10px;
+  width: clamp(52px, 5.5vw, 76px);
+  opacity: 0.9;
   z-index: 150;
   pointer-events: none;
-  mix-blend-mode: screen;
-  filter: hue-rotate(10deg) saturate(1.1);
+  border-radius: 8px;
 }
 
 /* ── PROGRESS BAR ── */
@@ -65,10 +64,7 @@ html, body {
   pointer-events: all;
 }
 #slide-12 {
-  overflow-y: auto;
-  justify-content: flex-start;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  justify-content: center;
 }
 
 /* ── SCANLINE OVERLAY ── */
@@ -97,53 +93,55 @@ html, body {
 }
 .corner.tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
 .corner.tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
-.corner.bl { bottom: 56px; left: 16px; border-width: 0 0 2px 2px; }
-.corner.br { bottom: 56px; right: 16px; border-width: 0 2px 2px 0; }
+.corner.bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
+.corner.br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
 
-/* ── NAVIGATION BAR ── */
-#nav {
+/* ── NAVIGATION — corner arrows ── */
+#btn-prev, #btn-next {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 48px;
-  background: rgba(10,10,10,0.95);
-  border-top: 1px solid var(--yellow);
-  display: flex; align-items: center; justify-content: center;
-  gap: 24px;
-  z-index: 200;
-}
-
-#nav button {
-  background: transparent;
+  bottom: 18px;
+  width: 42px; height: 42px;
+  background: rgba(10,10,10,0.82);
   border: 1px solid var(--yellow);
   color: var(--yellow);
   font-family: 'Courier New', monospace;
-  font-size: 15px;
+  font-size: 28px;
   font-weight: bold;
-  padding: 6px 20px;
+  line-height: 1;
   cursor: pointer;
-  letter-spacing: 1px;
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
   transition: background 0.2s, color 0.2s;
+  padding: 0;
 }
-#nav button:hover:not(:disabled) {
+#btn-prev { left: 18px; }
+#btn-next { right: 18px; }
+#btn-prev:hover:not(:disabled),
+#btn-next:hover:not(:disabled) {
   background: var(--yellow);
   color: var(--black);
 }
-#nav button:disabled {
-  opacity: 0.3;
+#btn-prev:disabled, #btn-next:disabled {
+  opacity: 0.25;
   cursor: default;
 }
 
 #counter {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
   color: var(--dim);
-  font-size: 15px;
-  min-width: 60px;
-  text-align: center;
+  font-size: 13px;
   letter-spacing: 2px;
+  z-index: 200;
+  pointer-events: none;
+  font-family: 'Courier New', monospace;
 }
 
 /* ── MISSION TAG ── */
 .mission-tag {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 4px;
   color: var(--yellow);
   text-transform: uppercase;
@@ -153,7 +151,7 @@ html, body {
 
 /* ── TYPOGRAPHY ── */
 .title-main {
-  font-size: clamp(34px, 5.5vw, 68px);
+  font-size: clamp(38px, 5.9vw, 74px);
   font-weight: 900;
   color: var(--yellow);
   text-align: center;
@@ -163,7 +161,7 @@ html, body {
 }
 
 .title-sub {
-  font-size: clamp(18px, 2.7vw, 30px);
+  font-size: clamp(20px, 2.9vw, 34px);
   color: var(--green);
   text-align: center;
   margin-top: 14px;
@@ -172,7 +170,7 @@ html, body {
 }
 
 .slide-heading {
-  font-size: clamp(22px, 3.5vw, 44px);
+  font-size: clamp(25px, 3.8vw, 49px);
   font-weight: 900;
   color: var(--yellow);
   text-align: center;
@@ -194,7 +192,7 @@ html, body {
   border-left: 3px solid var(--yellow);
   background: rgba(245,197,24,0.04);
   padding: 18px 24px;
-  font-size: clamp(15px, 1.7vw, 20px);
+  font-size: clamp(16px, 1.9vw, 23px);
   line-height: 1.8;
   text-align: left;
   width: 100%;
@@ -205,7 +203,7 @@ html, body {
   border-collapse: collapse;
   width: 100%;
   max-width: 900px;
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: clamp(15px, 1.8vw, 20px);
 }
 .gta-table th {
   background: rgba(245,197,24,0.12);
@@ -214,7 +212,7 @@ html, body {
   padding: 10px 14px;
   text-align: center;
   letter-spacing: 1px;
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-size: clamp(14px, 1.6vw, 18px);
 }
 .gta-table td {
   border: 1px solid rgba(245,197,24,0.15);
@@ -252,16 +250,16 @@ html, body {
   width: 3px; height: 100%;
   background: var(--green);
 }
-.var-name  { font-size: clamp(20px, 2.6vw, 30px); color: var(--green); font-weight: 900; margin-bottom: 4px; }
-.var-label { font-size: clamp(14px, 1.6vw, 18px); color: var(--yellow); font-weight: bold; margin-bottom: 5px; }
-.var-desc  { font-size: clamp(13px, 1.4vw, 16px); color: var(--dim); line-height: 1.5; }
+.var-name  { font-size: clamp(23px, 2.9vw, 34px); color: var(--green); font-weight: 900; margin-bottom: 4px; }
+.var-label { font-size: clamp(15px, 1.8vw, 20px); color: var(--yellow); font-weight: bold; margin-bottom: 5px; }
+.var-desc  { font-size: clamp(14px, 1.6vw, 18px); color: var(--dim); line-height: 1.5; }
 
 /* ── MATH BLOCK ── */
 .math-block {
   background: rgba(57,255,20,0.05);
   border: 1px solid rgba(57,255,20,0.3);
   padding: 20px 36px;
-  font-size: clamp(18px, 2.6vw, 34px);
+  font-size: clamp(20px, 2.9vw, 38px);
   color: var(--green);
   font-weight: 900;
   letter-spacing: 1px;
@@ -271,7 +269,7 @@ html, body {
   text-shadow: 0 0 16px rgba(57,255,20,0.4);
 }
 .math-explain {
-  font-size: clamp(14px, 1.6vw, 17px);
+  font-size: clamp(15px, 1.8vw, 19px);
   color: var(--dim);
   margin-top: 8px;
   text-align: center;
@@ -282,7 +280,7 @@ html, body {
   list-style: none;
   max-width: 860px;
   width: 100%;
-  font-size: clamp(13px, 1.5vw, 17px);
+  font-size: clamp(14px, 1.7vw, 19px);
 }
 .constraint-list li {
   display: flex;
@@ -293,9 +291,9 @@ html, body {
   margin-bottom: 6px;
   background: rgba(255,255,255,0.02);
 }
-.cst-math  { color: var(--green); font-weight: bold; min-width: 300px; font-size: clamp(13px, 1.4vw, 16px); }
-.cst-label { color: var(--dim); font-size: clamp(13px, 1.3vw, 15px); }
-.cst-icon  { font-size: 18px; min-width: 20px; }
+.cst-math  { color: var(--green); font-weight: bold; min-width: 300px; font-size: clamp(14px, 1.6vw, 18px); }
+.cst-label { color: var(--dim); font-size: clamp(14px, 1.5vw, 17px); }
+.cst-icon  { font-size: 20px; min-width: 20px; }
 
 /* ── BRANCH & BOUND ── */
 .bb-container {
@@ -304,7 +302,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-size: clamp(14px, 1.6vw, 18px);
 }
 .bb-steps {
   display: flex;
@@ -324,7 +322,7 @@ html, body {
 }
 .bb-step.bad  { border-left-color: var(--red); background: rgba(255,34,34,0.04); }
 .bb-step.good { border-left-color: var(--green); background: rgba(57,255,20,0.04); }
-.bb-num  { min-width: 22px; font-weight: 900; color: var(--yellow); font-size: clamp(15px, 1.7vw, 18px); }
+.bb-num  { min-width: 22px; font-weight: 900; color: var(--yellow); font-size: clamp(16px, 1.9vw, 20px); }
 .bb-num.bad  { color: var(--red); }
 .bb-num.good { color: var(--green); }
 .bb-text { color: var(--white); line-height: 1.5; }
@@ -347,8 +345,8 @@ html, body {
   padding: 12px 8px;
   text-align: center;
 }
-.result-card .rv { font-size: clamp(24px, 3.2vw, 40px); color: var(--green); font-weight: 900; }
-.result-card .rl { font-size: clamp(12px, 1.25vw, 14px); color: var(--dim); margin-top: 4px; }
+.result-card .rv { font-size: clamp(27px, 3.6vw, 45px); color: var(--green); font-weight: 900; }
+.result-card .rl { font-size: clamp(14px, 1.4vw, 16px); color: var(--dim); margin-top: 4px; }
 
 .total-box {
   border: 2px solid var(--yellow);
@@ -359,12 +357,12 @@ html, body {
   width: 100%;
   margin-bottom: 14px;
 }
-.total-box .tl { font-size: clamp(13px, 1.4vw, 16px); color: var(--dim); letter-spacing: 2px; margin-bottom: 4px; }
-.total-box .tv { font-size: clamp(28px, 4vw, 54px); color: var(--yellow); font-weight: 900; text-shadow: 0 0 20px rgba(245,197,24,0.5); }
+.total-box .tl { font-size: clamp(14px, 1.6vw, 18px); color: var(--dim); letter-spacing: 2px; margin-bottom: 4px; }
+.total-box .tv { font-size: clamp(31px, 4.5vw, 59px); color: var(--yellow); font-weight: 900; text-shadow: 0 0 20px rgba(245,197,24,0.5); }
 
 .check-list {
   list-style: none;
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-size: clamp(14px, 1.6vw, 18px);
   color: var(--dim);
   max-width: 780px;
   width: 100%;
@@ -377,7 +375,7 @@ html, body {
   background: rgba(57,255,20,0.06);
   border-left: 3px solid var(--green);
   padding: 11px 16px;
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: clamp(15px, 1.8vw, 20px);
   color: var(--white);
   line-height: 1.7;
   text-align: left;
@@ -431,7 +429,7 @@ html, body {
 .capa-text .title-sub   { text-align: left; margin-top: 10px; }
 .capa-footer {
   margin-top: 20px;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 3px;
   color: var(--dim);
 }
@@ -454,13 +452,13 @@ html, body {
   text-align: center;
 }
 .rc-val {
-  font-size: clamp(30px, 4vw, 52px);
+  font-size: clamp(33px, 4.5vw, 58px);
   color: var(--green);
   font-weight: 900;
   line-height: 1;
 }
 .rc-lbl {
-  font-size: clamp(13px, 1.4vw, 15px);
+  font-size: clamp(14px, 1.6vw, 17px);
   color: var(--dim);
   margin-top: 6px;
 }
@@ -478,10 +476,10 @@ html, body {
 .model-half {
   border: 1px solid rgba(245,197,24,0.25);
   background: rgba(245,197,24,0.03);
-  padding: 18px 20px;
+  padding: 12px 16px;
 }
 .model-half-title {
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-size: clamp(14px, 1.6vw, 18px);
   color: var(--yellow);
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -491,19 +489,19 @@ html, body {
 }
 .formula-green {
   color: var(--green);
-  font-size: clamp(16px, 1.8vw, 22px);
+  font-size: clamp(18px, 2vw, 24px);
   font-weight: 900;
   line-height: 1.8;
 }
 .formula-note {
   color: var(--dim);
-  font-size: clamp(12px, 1.3vw, 14px);
+  font-size: clamp(14px, 1.4vw, 16px);
   margin-top: 8px;
 }
 .formula-rest {
   color: var(--green);
   font-size: clamp(14px, 1.5vw, 17px);
-  line-height: 1.9;
+  line-height: 1.55;
 }
 .formula-rest .cm {
   color: var(--dim);
@@ -527,14 +525,14 @@ html, body {
   padding: 22px;
 }
 .q-card-num {
-  font-size: clamp(12px, 1.3vw, 14px);
+  font-size: clamp(14px, 1.4vw, 16px);
   color: var(--yellow);
   letter-spacing: 4px;
   text-transform: uppercase;
   margin-bottom: 12px;
 }
 .q-card-text {
-  font-size: clamp(15px, 1.65vw, 18px);
+  font-size: clamp(16px, 1.9vw, 20px);
   color: var(--white);
   line-height: 1.8;
 }
@@ -545,7 +543,7 @@ html, body {
   background: rgba(57,255,20,0.04);
   padding: 14px 22px;
   text-align: center;
-  font-size: clamp(16px, 1.8vw, 22px);
+  font-size: clamp(18px, 2vw, 24px);
   color: var(--green);
   font-weight: 900;
   letter-spacing: 1px;
@@ -573,19 +571,19 @@ html, body {
 }
 .cs-num {
   min-width: 30px;
-  font-size: clamp(17px, 1.9vw, 22px);
+  font-size: clamp(19px, 2.2vw, 24px);
   color: var(--yellow);
   font-weight: 900;
 }
 .cs-body { flex: 1; }
 .cs-label {
-  font-size: clamp(14px, 1.55vw, 17px);
+  font-size: clamp(15px, 1.7vw, 19px);
   color: var(--white);
   margin-bottom: 4px;
   font-weight: bold;
 }
 .cs-formula {
-  font-size: clamp(14px, 1.55vw, 17px);
+  font-size: clamp(15px, 1.7vw, 19px);
   color: var(--green);
 }
 .cs-formula .frac {
@@ -603,7 +601,7 @@ html, body {
   border-left: 3px solid var(--dim);
   background: rgba(255,255,255,0.02);
   padding: 10px 18px;
-  font-size: clamp(14px, 1.5vw, 17px);
+  font-size: clamp(15px, 1.7vw, 19px);
   color: var(--dim);
   font-style: italic;
   margin-bottom: 14px;
@@ -621,14 +619,14 @@ html, body {
   padding: 16px;
 }
 .ans-vars-title {
-  font-size: clamp(12px, 1.3vw, 14px);
+  font-size: clamp(14px, 1.4vw, 16px);
   color: var(--green);
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-bottom: 12px;
 }
 .ans-var {
-  font-size: clamp(15px, 1.65vw, 18px);
+  font-size: clamp(16px, 1.9vw, 20px);
   color: var(--white);
   padding: 3px 0;
 }
@@ -639,9 +637,9 @@ html, body {
   border-top: 1px solid rgba(57,255,20,0.4);
   padding-top: 10px;
 }
-.z-mini .zl { font-size: clamp(12px,1.3vw,14px); color: var(--dim); letter-spacing: 1px; }
+.z-mini .zl { font-size: clamp(14px, 1.4vw, 16px); color: var(--dim); letter-spacing: 1px; }
 .z-mini .zv {
-  font-size: clamp(26px, 3.4vw, 42px);
+  font-size: clamp(29px, 3.8vw, 47px);
   color: var(--yellow);
   font-weight: 900;
   text-shadow: 0 0 16px rgba(245,197,24,0.5);
@@ -658,14 +656,14 @@ html, body {
   padding: 10px 12px;
   text-align: center;
 }
-.mc-val { font-size: clamp(16px, 1.8vw, 21px); color: var(--green); font-weight: 900; }
-.mc-lbl { font-size: clamp(12px, 1.25vw, 14px); color: var(--dim); margin-top: 3px; }
+.mc-val { font-size: clamp(18px, 2vw, 23px); color: var(--green); font-weight: 900; }
+.mc-lbl { font-size: clamp(14px, 1.4vw, 16px); color: var(--dim); margin-top: 3px; }
 
 /* ── CHECK TABLE (Slide 11) ── */
 .check-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: clamp(13px, 1.5vw, 17px);
+  font-size: clamp(14px, 1.7vw, 19px);
   margin-bottom: 10px;
 }
 .check-table th {
@@ -675,7 +673,7 @@ html, body {
   padding: 8px 12px;
   text-align: center;
   letter-spacing: 1px;
-  font-size: clamp(12px, 1.3vw, 15px);
+  font-size: clamp(14px, 1.4vw, 17px);
 }
 .check-table td {
   border: 1px solid rgba(245,197,24,0.12);
@@ -685,7 +683,7 @@ html, body {
 }
 .check-ok { color: var(--green); font-weight: bold; font-size: 1.1em; }
 .formula-z {
-  font-size: clamp(15px, 1.7vw, 18px);
+  font-size: clamp(16px, 1.9vw, 20px);
   color: var(--green);
   font-weight: 900;
   background: rgba(57,255,20,0.04);
@@ -697,11 +695,6 @@ html, body {
 /* ══════════════════════════════════════════
    SLIDE 12 — layout específico
 ══════════════════════════════════════════ */
-#slide-12 {
-  justify-content: flex-start;
-  padding-top: 22px;
-  padding-bottom: 58px; /* limpa a nav bar */
-}
 
 /* ══════════════════════════════════════════
    SLIDE 12 — CONCLUSION GRID
@@ -744,7 +737,7 @@ html, body {
   border: 1px solid rgba(245,197,24,0.2);
 }
 .conc-title {
-  font-size: clamp(13px, 1.4vw, 16px);
+  font-size: clamp(14px, 1.6vw, 18px);
   color: var(--yellow);
   font-weight: 900;
   margin-bottom: 6px;
@@ -752,7 +745,7 @@ html, body {
   letter-spacing: 1px;
 }
 .conc-text {
-  font-size: clamp(12px, 1.2vw, 14px);
+  font-size: clamp(14px, 1.4vw, 16px);
   color: #ffffff;
   line-height: 1.6;
 }
@@ -762,7 +755,7 @@ html, body {
   border-left: 3px solid var(--green);
   background: rgba(57,255,20,0.04);
   padding: 14px 20px;
-  font-size: clamp(15px, 1.7vw, 20px);
+  font-size: clamp(16px, 1.9vw, 23px);
   color: var(--green);
   font-style: italic;
   text-align: center;
@@ -770,7 +763,7 @@ html, body {
 }
 
 .conc-fim {
-  font-size: clamp(48px, 7vw, 90px);
+  font-size: clamp(52px, 7.7vw, 99px);
   font-weight: 900;
   color: var(--yellow);
   text-transform: uppercase;
@@ -781,7 +774,7 @@ html, body {
   text-shadow: 0 0 40px rgba(245,197,24,0.4);
 }
 .conc-obrigado {
-  font-size: clamp(22px, 3vw, 40px);
+  font-size: clamp(24px, 3.3vw, 45px);
   font-weight: 700;
   color: #ffffff;
   text-align: center;
@@ -796,7 +789,7 @@ html, body {
   border: 2px solid var(--yellow);
   background: rgba(245,197,24,0.04);
   padding: 14px 24px;
-  font-size: clamp(13px, 1.5vw, 17px);
+  font-size: clamp(14px, 1.7vw, 19px);
   color: var(--yellow);
   font-weight: 900;
   text-transform: uppercase;
